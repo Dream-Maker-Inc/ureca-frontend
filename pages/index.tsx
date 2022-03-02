@@ -1,10 +1,12 @@
-import type { NextPage } from "next";
 import { css } from "@emotion/react";
+import { Button } from "@mui/material";
+import type { NextPage } from "next";
 
 const Home: NextPage = () => {
   return (
     <main>
-      <button css={button}>TestButton</button>
+      <button css={button}>Test Button</button>
+      <Button variant="contained">Test Mui Button</Button>
     </main>
   );
 };
