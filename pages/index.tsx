@@ -7,6 +7,7 @@ const Home: NextPage = () => {
     <main>
       <button css={button}>Test Button</button>
       <Button variant="contained">Test Mui Button</Button>
+      test
     </main>
   );
 };
