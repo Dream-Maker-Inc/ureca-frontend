@@ -19,10 +19,6 @@ export const useLoginForm = () => {
     // TODO action signup
   };
 
-  const handleSignup = () => {
-    // TODO sign up
-  };
-
   return {
     emailState: {
       value: email,
@@ -34,6 +30,5 @@ export const useLoginForm = () => {
     },
     handlePasswordFind,
     handleLogin,
-    handleSignup,
   };
 };

@@ -14,8 +14,12 @@ import React from "react";
 import { SocialLoginGroup } from "../SocialLoginGroup";
 import { useLoginForm } from "./useLoginForm";
 
-const LoginForm = () => {
-  const { emailState, pwState, handlePasswordFind, handleLogin, handleSignup } =
+export type LoginFormProps = {
+  onSignup: () => void;
+};
+
+const LoginForm = ({ onSignup }: LoginFormProps) => {
+  const { emailState, pwState, handlePasswordFind, handleLogin } =
     useLoginForm();
 
   return (
@@ -50,7 +54,7 @@ const LoginForm = () => {
         <Typography variant={"caption"} color={"grey.400"}>
           {"유레카가 처음이세요?"}
         </Typography>
-        <Button variant={"text"} onClick={handleSignup}>
+        <Button variant={"text"} onClick={onSignup}>
           <Typography variant={"caption"}>{"회원가입"}</Typography>
         </Button>
       </section>

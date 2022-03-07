@@ -1,7 +1,9 @@
 import CertificationIcon from "@/ui/components/icons/CertificationIcon";
 import InternetIcon from "@/ui/components/icons/InternetIcon";
 import { LockRounded } from "@mui/icons-material";
+import { useState } from "react";
 import { LoginSwiperItemProps } from "../Login/components/LoginSwiperItem";
+import { AuthScene } from "../types/AuthScene.type";
 
 export const useAuthPage = () => {
   const loginSwiperItems: LoginSwiperItemProps[] = [
@@ -34,5 +36,14 @@ export const useAuthPage = () => {
     },
   ];
 
-  return { loginSwiperItems };
+  const [authScene, setAuthScene] = useState<AuthScene>(AuthScene.Login);
+  const handleChangeScene = (scene: AuthScene) => setAuthScene(scene);
+
+  return {
+    loginSwiperItems,
+    authSceneState: {
+      value: authScene,
+      onChange: handleChangeScene,
+    },
+  };
 };

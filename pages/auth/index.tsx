@@ -9,6 +9,8 @@ import {
   LoginHeader,
   LoginSwiperItem,
 } from "@/ui/domains/Auth/Login";
+import { SignupSection } from "@/ui/domains/Auth/SignUp";
+import { AuthScene } from "@/ui/domains/Auth/types/AuthScene.type";
 import { verticalScrollable } from "@/ui/styles/Scrollable";
 import { LightColor } from "@/ui/themes/Color";
 import { ScreenType } from "@/ui/themes/Limit";
@@ -21,7 +23,7 @@ import SwiperCore, { Autoplay, Pagination } from "swiper";
 const AuthPage: NextPage = () => {
   SwiperCore.use([Pagination, Autoplay]);
 
-  const { loginSwiperItems } = useAuthPage();
+  const { loginSwiperItems, authSceneState } = useAuthPage();
 
   return (
     <main css={styles.main}>
@@ -46,10 +48,20 @@ const AuthPage: NextPage = () => {
           </section>
 
           <section css={styles.right}>
-            <div css={styles.loginWrapper}>
-              <LoginHeader />
-              <LoginForm />
-            </div>
+            {authSceneState.value === AuthScene.Login && (
+              <div css={styles.loginWrapper}>
+                <LoginHeader />
+                <LoginForm
+                  onSignup={() => authSceneState.onChange(AuthScene.Signup)}
+                />
+              </div>
+            )}
+
+            {authSceneState.value === AuthScene.Signup && (
+              <SignupSection
+                onBack={() => authSceneState.onChange(AuthScene.Login)}
+              />
+            )}
           </section>
         </div>
       </MainCard>
