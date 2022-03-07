@@ -1,9 +1,9 @@
-import { LoginSwiperItemProps } from "../components/LoginSwiperItem";
-import { LockRounded } from "@mui/icons-material";
-import InternetIcon from "@/ui/components/icons/InternetIcon";
 import CertificationIcon from "@/ui/components/icons/CertificationIcon";
+import InternetIcon from "@/ui/components/icons/InternetIcon";
+import { LockRounded } from "@mui/icons-material";
+import { LoginSwiperItemProps } from "../Login/components/LoginSwiperItem";
 
-export const useLoginPage = () => {
+export const useAuthPage = () => {
   const loginSwiperItems: LoginSwiperItemProps[] = [
     {
       icon: (

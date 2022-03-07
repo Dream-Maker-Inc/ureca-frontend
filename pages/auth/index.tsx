@@ -3,10 +3,12 @@ import {
   CustomSwiper,
   CustomSwiperSlide,
 } from "@/ui/components/swipers/CustomSwiper/CustomSwiper";
-import { LoginForm } from "@/ui/domains/logins/components/LoginForm";
-import { LoginHeader } from "@/ui/domains/logins/components/LoginHeader";
-import { LoginSwiperItem } from "@/ui/domains/logins/components/LoginSwiperItem";
-import { useLoginPage } from "@/ui/domains/logins/hooks/useLoginPage";
+import { useAuthPage } from "@/ui/domains/Auth/hooks/useAuthPage";
+import {
+  LoginForm,
+  LoginHeader,
+  LoginSwiperItem,
+} from "@/ui/domains/Auth/Login";
 import { verticalScrollable } from "@/ui/styles/Scrollable";
 import { LightColor } from "@/ui/themes/Color";
 import { ScreenType } from "@/ui/themes/Limit";
@@ -16,10 +18,10 @@ import Card, { CardProps } from "@mui/material/Card";
 import { NextPage } from "next";
 import SwiperCore, { Autoplay, Pagination } from "swiper";
 
-const LoginPage: NextPage = () => {
+const AuthPage: NextPage = () => {
   SwiperCore.use([Pagination, Autoplay]);
 
-  const { loginSwiperItems } = useLoginPage();
+  const { loginSwiperItems } = useAuthPage();
 
   return (
     <main css={styles.main}>
@@ -55,7 +57,7 @@ const LoginPage: NextPage = () => {
   );
 };
 
-export default LoginPage;
+export default AuthPage;
 
 const styles = {
   main: css`
