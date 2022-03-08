@@ -3,25 +3,24 @@ import { verticalScrollable } from "@/ui/styles/Scrollable";
 import { css } from "@emotion/react";
 import { CloseRounded } from "@mui/icons-material";
 import { IconButton, Tooltip } from "@mui/material";
-import { useState } from "react";
-import { VerifyPhone } from "../../../Phone/VerifyPhone";
-import { VerifyPhoneCode } from "../../../Phone/VerifyPhoneCode/VerifyPhoneCode";
+import { VerifyPhone, VerifyPhoneCode } from "../../../Phone";
 import { SignupScene } from "../../types/SignupScene.type";
 import { BasicInfoForm } from "../BasicInfoForm";
 import { Welcome } from "../Welcome";
+import { useSignupSection } from "./useSignupSection";
 
 export type SignupSectionProps = {
   onBack: () => void;
 };
 
 export const SignupSection = ({ onBack }: SignupSectionProps) => {
-  const [scene, setScene] = useState<SignupScene>(SignupScene.Basic);
-  const onSceneChange = (scene: SignupScene) => setScene(scene);
-
-  const handleBasicFormSubmit = () => onSceneChange(SignupScene.VerifyPhone);
-  const handleVerifyPhoneSubmit = () =>
-    onSceneChange(SignupScene.VerifyPhoneCode);
-  const handleVerifyPhoneCodeSubmit = () => onSceneChange(SignupScene.Welcome);
+  const {
+    scene,
+    handleBasicFormSubmit,
+    handleVerifyPhoneSubmit,
+    handleVerifyPhoneCodeSubmit,
+    handleWelcomeAnimationComplete,
+  } = useSignupSection();
 
   const getScene = (scene: SignupScene) => {
     switch (scene) {
@@ -32,7 +31,11 @@ export const SignupSection = ({ onBack }: SignupSectionProps) => {
       case SignupScene.VerifyPhoneCode:
         return <VerifyPhoneCode onSubmit={handleVerifyPhoneCodeSubmit} />;
       case SignupScene.Welcome:
-        return <Welcome />;
+        return (
+          <Welcome
+            onAnimationComplete={() => handleWelcomeAnimationComplete(onBack)}
+          />
+        );
     }
   };
 

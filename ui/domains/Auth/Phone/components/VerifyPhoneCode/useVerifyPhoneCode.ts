@@ -1,13 +1,20 @@
 import { ExternalPath } from "@/ui/constants/Path";
 import { AuthPhonePolicy } from "@/ui/domains/Policy";
 import { useState } from "react";
-import {
-  initialVerificationCode,
-  VerificationCode,
-  verificationCodeMaxLength,
-} from "./VerificationCodeInputGroup";
+import { VerificationCode } from "../VerifyCodeInputs/VerifyCodeInputs.model";
 
 const RealVerificationCode = 1111;
+
+export const initialVerificationCode: VerificationCode = {
+  first: "",
+  second: "",
+  third: "",
+  fourth: "",
+};
+
+export const verificationCodeMaxLength = Object.keys(
+  initialVerificationCode
+).length;
 
 export const useVerifyPhoneCode = (onSubmit: () => void) => {
   const [time, setTime] = useState(AuthPhonePolicy.maxTime);
@@ -31,9 +38,7 @@ export const useVerifyPhoneCode = (onSubmit: () => void) => {
   const handleRetry = () => setTime(AuthPhonePolicy.maxTime);
   const handleHelp = () => window.open(ExternalPath.PhoneAuthHelp);
 
-  if (isValidCode) {
-    onSubmit();
-  }
+  if (isValidCode) onSubmit();
 
   return {
     timerState: {

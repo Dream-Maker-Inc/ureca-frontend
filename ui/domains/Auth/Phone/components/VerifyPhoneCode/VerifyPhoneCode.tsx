@@ -1,8 +1,8 @@
+import { Timer } from "@/ui/components/misc/Timer";
 import { css } from "@emotion/react";
 import { Button, ButtonProps, Tooltip, Typography } from "@mui/material";
+import { VerifyCodeInputs } from "../VerifyCodeInputs";
 import { useVerifyPhoneCode } from "./useVerifyPhoneCode";
-import VerificationCodeInputGroup from "./VerificationCodeInputGroup";
-import VerificationTimer from "./VerificationTimer";
 
 export type VerifyPhoneCodeProps = {
   onSubmit: () => void;
@@ -34,9 +34,9 @@ export const VerifyPhoneCode = ({ onSubmit }: VerifyPhoneCodeProps) => {
       </header>
 
       <form css={styles.form}>
-        <VerificationCodeInputGroup
-          verificationCode={verifyState.value}
-          setVerificationCode={verifyState.setValue}
+        <VerifyCodeInputs
+          code={verifyState.value}
+          setCode={verifyState.setValue}
           textFieldProps={{ error: verifyError }}
         />
 
@@ -49,7 +49,7 @@ export const VerifyPhoneCode = ({ onSubmit }: VerifyPhoneCodeProps) => {
 
           {!timerState.timeOver && (
             <div aria-label={"타이머"} css={styles.timerWrapper}>
-              <VerificationTimer
+              <Timer
                 time={timerState.value}
                 setTime={timerState.setValue}
                 errorColor={"warning.main"}

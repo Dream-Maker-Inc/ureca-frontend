@@ -3,24 +3,20 @@ import { ChangeEvent, useState } from "react";
 
 export const useBasicInfoForm = () => {
   const [nickname, setNickname] = useState("");
-  const handleChangeNickname = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleChangeNickname = (e: ChangeEvent<HTMLInputElement>) =>
     setNickname(e.target.value);
-  };
 
   const [email, setEmail] = useState("");
-  const handleChangeEmail = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleChangeEmail = (e: ChangeEvent<HTMLInputElement>) =>
     setEmail(e.target.value);
-  };
 
   const [password, setPassword] = useState("");
-  const handleChangePassword = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleChangePassword = (e: ChangeEvent<HTMLInputElement>) =>
     setPassword(e.target.value);
-  };
 
   const [passwordConfirm, setPasswordConfirm] = useState("");
-  const handleChangePasswordConfirm = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleChangePasswordConfirm = (e: ChangeEvent<HTMLInputElement>) =>
     setPasswordConfirm(e.target.value);
-  };
 
   const emailError =
     email !== "" &&
