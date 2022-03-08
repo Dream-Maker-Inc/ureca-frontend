@@ -1,5 +1,5 @@
 import { ChangeEvent, useState } from "react";
-import { VerificationCode } from "./VerifyCodeInputs.model";
+import { VerificationCode } from "./VerifyCodeInputs";
 
 export const useVerifyCodeInputs = (
   code: VerificationCode,

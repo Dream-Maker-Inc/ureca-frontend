@@ -1,20 +1,16 @@
 import { Logo } from "@/ui/components/logo/Ureca/Logo";
 import { css } from "@emotion/react";
-import { Typography, TypographyProps } from "@mui/material";
+import { Typography } from "@mui/material";
 import React from "react";
 
-export type LoginHeaderProps = {
-  subtitleTypoProps?: TypographyProps;
-};
-
-export const LoginHeader = ({ subtitleTypoProps }: LoginHeaderProps) => {
+export const LoginHeader = () => {
   return (
     <header css={root}>
       <div css={logoWrapper}>
         <Logo />
       </div>
 
-      <Typography variant={"subtitle2"} {...subtitleTypoProps}>
+      <Typography variant={"subtitle2"}>
         {"로그인 후 모든 기능을 이용해보세요!"}
       </Typography>
     </header>

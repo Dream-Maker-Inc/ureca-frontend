@@ -1,25 +1,18 @@
 import { LockOpenOutlined, LockOutlined } from "@mui/icons-material";
 import { IconButton, TextField, TextFieldProps, Tooltip } from "@mui/material";
-import React, { ReactNode, useState } from "react";
+import React, { ReactNode } from "react";
+import { usePasswordTextField } from "./usePasswordTextField";
 
 export type PasswordTextFieldProps = {
   endAdornment?: ReactNode;
 } & TextFieldProps;
 
-export const PasswordTextField = (p: PasswordTextFieldProps) => {
-  const { endAdornment, ...textFieldProps } = p;
-
-  const [isVisible, setVisible] = useState(false);
-  const toggleVisiblity = () => setVisible(!isVisible);
-
-  const isNotValidValue = !textFieldProps.value;
-  const inputType = isVisible ? "text" : "password";
-  const tooltipTitle = isVisible ? "비밀번호 숨기기" : "비밀번호 보이기";
-  const icon = isVisible ? (
-    <LockOpenOutlined fontSize={"small"} />
-  ) : (
-    <LockOutlined fontSize={"small"} />
-  );
+export const PasswordTextField = ({
+  endAdornment,
+  ...textFieldProps
+}: PasswordTextFieldProps) => {
+  const { inputType, isNotValidValue, isVisible, toggleVisiblity, tooltip } =
+    usePasswordTextField(textFieldProps.value as string);
 
   return (
     <TextField
@@ -28,17 +21,23 @@ export const PasswordTextField = (p: PasswordTextFieldProps) => {
       type={inputType}
       InputProps={{
         startAdornment: (
-          <Tooltip title={tooltipTitle}>
-            <IconButton
-              sx={{ ml: -1 }}
-              disabled={isNotValidValue}
-              onClick={toggleVisiblity}
-            >
-              {icon}
-            </IconButton>
+          <Tooltip title={tooltip}>
+            <span>
+              <IconButton
+                sx={{ ml: -1 }}
+                disabled={isNotValidValue}
+                onClick={toggleVisiblity}
+              >
+                {isVisible ? (
+                  <LockOpenOutlined fontSize={"small"} />
+                ) : (
+                  <LockOutlined fontSize={"small"} />
+                )}
+              </IconButton>
+            </span>
           </Tooltip>
         ),
-        endAdornment: endAdornment,
+        endAdornment,
       }}
       {...textFieldProps}
     />

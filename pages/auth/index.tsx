@@ -4,11 +4,8 @@ import {
   CustomSwiperSlide,
 } from "@/ui/components/swipers/CustomSwiper/CustomSwiper";
 import { useAuthPage } from "@/ui/domains/Auth/hooks/useAuthPage";
-import {
-  LoginForm,
-  LoginHeader,
-  LoginSwiperItem,
-} from "@/ui/domains/Auth/Login";
+import { LoginSwiperItem } from "@/ui/domains/Auth/Login";
+import { LoginSection } from "@/ui/domains/Auth/Login/components/LoginSection";
 import { SignupSection } from "@/ui/domains/Auth/SignUp";
 import { AuthScene } from "@/ui/domains/Auth/types/AuthScene.type";
 import { verticalScrollable } from "@/ui/styles/Scrollable";
@@ -49,12 +46,11 @@ const AuthPage: NextPage = () => {
 
           <section css={styles.right}>
             {authSceneState.value === AuthScene.Login && (
-              <div css={styles.loginWrapper}>
-                <LoginHeader />
-                <LoginForm
-                  onSignup={() => authSceneState.onChange(AuthScene.Signup)}
-                />
-              </div>
+              <LoginSection
+                formProps={{
+                  onSignup: () => authSceneState.onChange(AuthScene.Signup),
+                }}
+              />
             )}
 
             {authSceneState.value === AuthScene.Signup && (
@@ -113,15 +109,6 @@ const styles = {
     height: 100%;
     justify-content: center;
     align-items: center;
-  `,
-  loginWrapper: css`
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    max-width: 380px;
-    align-items: center;
-    padding: 16px;
-    gap: 48px;
   `,
 };
 

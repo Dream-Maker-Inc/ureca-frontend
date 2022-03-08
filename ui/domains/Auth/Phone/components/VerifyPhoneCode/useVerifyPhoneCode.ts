@@ -1,7 +1,7 @@
 import { ExternalPath } from "@/ui/constants/Path";
 import { AuthPhonePolicy } from "@/ui/domains/Policy";
 import { useState } from "react";
-import { VerificationCode } from "../VerifyCodeInputs/VerifyCodeInputs.model";
+import { VerificationCode } from "../VerifyCodeInputs";
 
 const RealVerificationCode = 1111;
 

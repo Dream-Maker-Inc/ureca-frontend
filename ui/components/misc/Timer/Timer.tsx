@@ -15,8 +15,8 @@ export const Timer = ({
   pause = false,
 }: TimerProps) => {
   const isTimeWarning = time < 10;
-
   const timerColor = isTimeWarning ? errorColor : "default";
+
   useTimer(time, setTime, pause);
 
   return (

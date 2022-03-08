@@ -1,5 +1,5 @@
 import { SignupPolicy } from "@/ui/domains/Policy";
-import { formatToPhoneNumber } from "@/ui/utiles/format/FormatPhone";
+import { formatToPhoneNumber } from "@/ui/utils/format/FormatPhone/FormatPhone";
 import { ChangeEvent, useState } from "react";
 
 export const useVerifyPhone = () => {

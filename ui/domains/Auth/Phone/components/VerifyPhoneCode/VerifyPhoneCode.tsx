@@ -11,7 +11,6 @@ export type VerifyPhoneCodeProps = {
 export const VerifyPhoneCode = ({ onSubmit }: VerifyPhoneCodeProps) => {
   const { timerState, verifyState, onHelp, onRetry } =
     useVerifyPhoneCode(onSubmit);
-
   const {
     error: { isError: verifyError, text: verifyErrorText },
   } = verifyState;
@@ -40,7 +39,7 @@ export const VerifyPhoneCode = ({ onSubmit }: VerifyPhoneCodeProps) => {
           textFieldProps={{ error: verifyError }}
         />
 
-        <div aria-label="타이머 에러" css={styles.inputOptions}>
+        <div css={styles.inputOptions}>
           {verifyError && (
             <Typography variant={"caption"} color={"warning.main"}>
               {verifyErrorText}
@@ -56,6 +55,7 @@ export const VerifyPhoneCode = ({ onSubmit }: VerifyPhoneCodeProps) => {
               />
             </div>
           )}
+
           {timerState.timeOver && <RetryBtn onClick={onRetry} />}
         </div>
       </form>

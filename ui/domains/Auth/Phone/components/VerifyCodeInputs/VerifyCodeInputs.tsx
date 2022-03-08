@@ -2,7 +2,16 @@ import { css } from "@emotion/react";
 import { TextField, TextFieldProps } from "@mui/material";
 import React from "react";
 import { useVerifyCodeInputs } from "./useVerifyCodeInputs";
-import { VerifyCodeInputsProps } from "./VerifyCodeInputs.model";
+
+export type VerificationCode = {
+  [index: string]: string;
+};
+
+export type VerifyCodeInputsProps = {
+  code: VerificationCode;
+  setCode: (verificationCode: VerificationCode) => void;
+  textFieldProps?: TextFieldProps;
+};
 
 const VerifyCodeInputs = ({
   code,

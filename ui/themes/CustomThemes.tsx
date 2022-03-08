@@ -1,4 +1,4 @@
-import { createTheme } from "@mui/material/styles";
+import { createTheme, responsiveFontSizes } from "@mui/material/styles";
 import { useMemo, useState } from "react";
 import { lightPalette } from "./Color";
 import { ScreenType } from "./Limit";
@@ -59,6 +59,16 @@ export const lightTheme = createTheme({
         },
       },
     },
+    MuiTypography: {
+      styleOverrides: {
+        root: {
+          overflow: "hidden",
+          textOverflow: "ellipsis",
+          display: "-webkit-box",
+          WebkitBoxOrient: "vertical",
+        },
+      },
+    },
   },
 });
 
@@ -70,7 +80,7 @@ export enum ThemeTypes {
 export const findTheme = (theme: ThemeTypes) => {
   switch (theme) {
     default:
-      return lightTheme;
+      return responsiveFontSizes(lightTheme);
   }
 };
 
