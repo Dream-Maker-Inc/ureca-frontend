@@ -9,9 +9,8 @@ export const useVerifyPhone = () => {
   const phoneError =
     !isEmptyPhone && !isValidPhone && "유효한 휴대폰 번호가 아니에요.";
 
-  const handlePhoneChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const handlePhoneChange = (e: ChangeEvent<HTMLInputElement>) =>
     setPhone(formatToPhoneNumber(e.target.value));
-  };
 
   const handleSubmit = (callback: () => void) => callback();
 
