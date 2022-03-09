@@ -1,0 +1,1 @@
+export { AuthMainView } from "./AuthMainView";
