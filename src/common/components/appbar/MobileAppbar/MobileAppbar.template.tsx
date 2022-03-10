@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
-import { ArrowBackRounded } from "@mui/icons-material";
+import ArrowBackRounded from "@mui/icons-material/ArrowBackRounded";
 import {
   AppBar,
   AppBarProps,

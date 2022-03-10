@@ -4,7 +4,9 @@ import {
 } from "@/common/components/inputs/PasswordTextField";
 import { useThemeHook } from "@/themes/CustomThemes";
 import { css } from "@emotion/react";
-import { ErrorOutlineRounded, MailOutlineRounded } from "@mui/icons-material";
+import ErrorOutlineRounded from "@mui/icons-material/ErrorOutlineRounded";
+import MailOutlineRounded from "@mui/icons-material/MailOutlineRounded";
+
 import {
   Button,
   IconButton,

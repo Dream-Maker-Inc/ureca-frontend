@@ -1,7 +1,7 @@
 import { PasswordTextField } from "@/common/components/inputs/PasswordTextField";
 import { useThemeHook } from "@/themes/CustomThemes";
 import { css } from "@emotion/react";
-import { MailOutlineRounded } from "@mui/icons-material";
+import MailOutlineRounded from "@mui/icons-material/MailOutlineRounded";
 import {
   Button,
   InputAdornment,

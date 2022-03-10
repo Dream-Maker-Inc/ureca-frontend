@@ -1,11 +1,10 @@
 import { MobileAppbarTemplate } from "@/common/components/appbar/MobileAppbar";
 import { Logo } from "@/common/components/logo/UrecaLogo";
 import { css } from "@emotion/react";
-import {
-  CloseRounded,
-  FilterListRounded,
-  SearchRounded,
-} from "@mui/icons-material";
+import CloseRounded from "@mui/icons-material/CloseRounded";
+import FilterListRounded from "@mui/icons-material/FilterListRounded";
+import SearchRounded from "@mui/icons-material/SearchRounded";
+
 import {
   Divider,
   IconButton,

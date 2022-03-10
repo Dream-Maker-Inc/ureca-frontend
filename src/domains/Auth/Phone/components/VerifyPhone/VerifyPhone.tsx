@@ -1,5 +1,5 @@
 import { css } from "@emotion/react";
-import { ArrowForwardRounded } from "@mui/icons-material";
+import ArrowForwardRounded from "@mui/icons-material/ArrowForwardRounded";
 import {
   IconButton,
   IconButtonProps,

@@ -1,6 +1,6 @@
 import CertificationIcon from "@/common/components/icons/CertificationIcon";
 import InternetIcon from "@/common/components/icons/InternetIcon";
-import { LockRounded } from "@mui/icons-material";
+import LockRounded from "@mui/icons-material/LockRounded";
 import { useState } from "react";
 import { LoginSwiperItemProps } from "../../../Login/components/LoginSwiperItem";
 import { AuthScene } from "../../types/AuthScene.type";

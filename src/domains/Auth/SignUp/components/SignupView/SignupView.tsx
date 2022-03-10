@@ -1,7 +1,7 @@
 import { LogoLightGrey } from "@/common/components/logo/UrecaLogo";
 import { verticalScrollable } from "@/common/styles/Scrollable";
 import { css } from "@emotion/react";
-import { CloseRounded } from "@mui/icons-material";
+import CloseRounded from "@mui/icons-material/CloseRounded";
 import { IconButton, Tooltip } from "@mui/material";
 import { VerifyPhone, VerifyPhoneCode } from "../../../Phone";
 import { SignupScene } from "../../types/SignupScene.type";

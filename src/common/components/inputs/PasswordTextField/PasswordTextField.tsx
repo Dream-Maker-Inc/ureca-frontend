@@ -1,4 +1,5 @@
-import { LockOpenOutlined, LockOutlined } from "@mui/icons-material";
+import LockOutlined from "@mui/icons-material/LockOutlined";
+import LockOpenOutlined from "@mui/icons-material/LockOpenOutlined";
 import { IconButton, TextField, TextFieldProps, Tooltip } from "@mui/material";
 import React, { ReactNode } from "react";
 import { usePasswordTextField } from "./usePasswordTextField";
