@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { SignupScene } from "../../types/SignupScene.type";
 
-export const useSignupSection = () => {
+export const useSignupView = () => {
   const [scene, setScene] = useState<SignupScene>(SignupScene.Basic);
   const onSceneChange = (scene: SignupScene) => setScene(scene);
 

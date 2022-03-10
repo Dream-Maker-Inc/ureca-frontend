@@ -6,21 +6,21 @@ import { IconButton, Tooltip } from "@mui/material";
 import { VerifyPhone, VerifyPhoneCode } from "../../../Phone";
 import { SignupScene } from "../../types/SignupScene.type";
 import { BasicInfoForm } from "../BasicInfoForm";
-import { Welcome } from "../Welcome";
-import { useSignupSection } from "./useSignupSection";
+import { WelcomeView } from "../WelcomeView";
+import { useSignupView } from "./useSignupView";
 
-export type SignupSectionProps = {
+export type SignupViewProps = {
   onBack: () => void;
 };
 
-export const SignupSection = ({ onBack }: SignupSectionProps) => {
+export const SignupView = ({ onBack }: SignupViewProps) => {
   const {
     scene,
     handleBasicFormSubmit,
     handleVerifyPhoneSubmit,
     handleVerifyPhoneCodeSubmit,
     handleWelcomeAnimationComplete,
-  } = useSignupSection();
+  } = useSignupView();
 
   const getScene = (scene: SignupScene) => {
     switch (scene) {
@@ -32,7 +32,7 @@ export const SignupSection = ({ onBack }: SignupSectionProps) => {
         return <VerifyPhoneCode onSubmit={handleVerifyPhoneCodeSubmit} />;
       case SignupScene.Welcome:
         return (
-          <Welcome
+          <WelcomeView
             onAnimationComplete={() => handleWelcomeAnimationComplete(onBack)}
           />
         );

@@ -3,11 +3,11 @@ import { LoginForm } from "../LoginForm";
 import { LoginFormProps } from "../LoginForm/LoginForm";
 import { LoginHeader } from "../LoginHeader";
 
-export type LoginSectionProps = {
+export type LoginViewProps = {
   formProps: LoginFormProps;
 };
 
-export const LoginSection = ({ formProps }: LoginSectionProps) => {
+export const LoginView = ({ formProps }: LoginViewProps) => {
   return (
     <div css={root}>
       <LoginHeader />

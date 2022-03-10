@@ -4,9 +4,8 @@ import {
   CustomSwiperSlide,
 } from "@/common/components/swipers/CustomSwiper/CustomSwiper";
 import { useAuthMainView } from "@/domains/Auth/Main/components/AuthMainView/useAuthMainView";
-import { LoginSwiperItem } from "@/domains/Auth/Login";
-import { LoginSection } from "@/domains/Auth/Login/components/LoginSection";
-import { SignupSection } from "@/domains/Auth/SignUp";
+import { LoginSwiperItem, LoginView } from "@/domains/Auth/Login";
+import { SignupView } from "@/domains/Auth/SignUp";
 import { AuthScene } from "@/domains/Auth/Main/types/AuthScene.type";
 import { verticalScrollable } from "@/common/styles/Scrollable";
 import { LightColor } from "@/themes/Color";
@@ -45,7 +44,7 @@ export const AuthMainView = () => {
 
           <section css={styles.right}>
             {authSceneState.value === AuthScene.Login && (
-              <LoginSection
+              <LoginView
                 formProps={{
                   onSignup: () => authSceneState.onChange(AuthScene.Signup),
                 }}
@@ -53,7 +52,7 @@ export const AuthMainView = () => {
             )}
 
             {authSceneState.value === AuthScene.Signup && (
-              <SignupSection
+              <SignupView
                 onBack={() => authSceneState.onChange(AuthScene.Login)}
               />
             )}

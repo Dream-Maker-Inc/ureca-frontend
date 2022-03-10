@@ -2,11 +2,11 @@ import LottieAddUser from "@/common/animations/lottie/LottieAddUser/LottieAddUse
 import { css } from "@emotion/react";
 import { Typography } from "@mui/material";
 
-export type WelcomeProps = {
+export type WelcomeViewProps = {
   onAnimationComplete: () => void;
 };
 
-export const Welcome = ({ onAnimationComplete }: WelcomeProps) => {
+export const WelcomeView = ({ onAnimationComplete }: WelcomeViewProps) => {
   return (
     <article css={styles.root}>
       <div css={styles.inner}>
