@@ -8,7 +8,7 @@ export enum LightColor {
   PrimaryDeep = "#0061dc",
   PrimaryBright = "#E3F0FC",
 
-  Panger = "#E74C3C",
+  Danger = "#E74C3C",
 
   Grey600 = "#757575",
 }
@@ -23,6 +23,9 @@ export const lightPalette: PaletteOptions = {
   text: {
     primary: LightColor.Grey600,
     secondary: "#222",
+  },
+  error: {
+    main: LightColor.Danger,
   },
 };
 
