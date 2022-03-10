@@ -20,6 +20,9 @@ const Debug: NextPage = () => {
             <Link href={RoutePath.Projects} passHref>
               <Button>프로젝트 목록 페이지</Button>
             </Link>
+            <Link href={RoutePath.Partners} passHref>
+              <Button>파트너 목록 페이지</Button>
+            </Link>
           </Stack>
 
           <Stack alignItems={"center"}>

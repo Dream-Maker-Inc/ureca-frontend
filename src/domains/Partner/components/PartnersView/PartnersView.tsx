@@ -1,25 +1,25 @@
 import { TitleWithDesc } from "@/common/components/TitleWithDesc";
 import { verticalScrollable } from "@/common/styles/Scrollable";
 import { css } from "@emotion/react";
-import { ProjectListItem } from "../ProjectListItem";
-import { useProjectsView } from "./useProjectsView";
+import { PartnerListItem } from "../PartnerListItem";
+import { usePartnersView } from "./usePartnersView";
 
-export const ProjectsView = () => {
-  const { projects } = useProjectsView();
+export const PartnersView = () => {
+  const { partnersData } = usePartnersView();
 
   return (
     <main css={styles.root}>
       <section css={styles.contentSection}>
         <header css={styles.contentHeader}>
           <TitleWithDesc
-            title={"프로젝트 찾기"}
-            desc={"새로운 프로젝트를 찾아보세요."}
+            title={"파트너 찾기"}
+            desc={"새로운 파트너를 찾아보세요."}
           />
         </header>
 
         <section css={styles.listContainer}>
-          {projects.map((it) => (
-            <ProjectListItem key={it.title} {...it} />
+          {partnersData.map((it, index) => (
+            <PartnerListItem key={it.username + index} {...it} />
           ))}
         </section>
       </section>

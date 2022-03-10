@@ -1,4 +1,5 @@
 import { OptionChip } from "@/common/components/chips/OptionChip";
+import { PartnerType } from "@/common/policies/Partner";
 import { Shape } from "@/themes/Shape";
 import { css } from "@emotion/react";
 import {
@@ -10,46 +11,38 @@ import {
   Typography,
   TypographyProps,
 } from "@mui/material";
-import { useProjectListItem } from "./useProjectListItem";
+import { PartnerCertificationItem } from "./PartnerCertificationItem";
+import { usePartnerListItem } from "./usePartnerListItem";
 
-export type ProjectListItemChipModel = {
+export type PartnerListItemChipModel = {
   label: string;
   chipProps?: ChipProps;
 };
 
-export type ProjectListItemProps = {
-  title: string;
+export type PartnerListItemProps = {
   userAvatar: string;
   username: string;
-  restDeadline: number;
-  chipModels: ProjectListItemChipModel[];
+  partnerType: PartnerType;
+  chipModels: PartnerListItemChipModel[];
 };
 
-export const ProjectListItem = ({
-  title,
+export const PartnerListItem = ({
   userAvatar,
   username,
-  restDeadline,
+  partnerType,
   chipModels,
-}: ProjectListItemProps) => {
-  const { deadline, onClick } = useProjectListItem(restDeadline);
+}: PartnerListItemProps) => {
+  const { onClick } = usePartnerListItem();
+  const isCorporate = partnerType === "corporate";
 
   return (
     <RootButton onClick={onClick}>
       <article css={styles.inner}>
-        <section css={styles.row1}>
-          <div css={styles.clientWrapper}>
+        <section css={styles.left}>
+          <div css={styles.partnerWrapper}>
             <StyledAvatar src={userAvatar} />
-            <UserName>{username}</UserName>
+            <PartnerName>{username}</PartnerName>
           </div>
-
-          <DeadLine color={deadline.isDanger ? "error.main" : "text.primary"}>
-            {deadline.text}
-          </DeadLine>
-        </section>
-
-        <section>
-          <Title>{title}</Title>
 
           <div css={styles.chipsContainer}>
             {chipModels.map((it, index) => (
@@ -61,6 +54,10 @@ export const ProjectListItem = ({
             ))}
           </div>
         </section>
+
+        <div css={styles.certificationWrapper(isCorporate)}>
+          <PartnerCertificationItem />
+        </div>
       </article>
     </RootButton>
   );
@@ -69,25 +66,31 @@ export const ProjectListItem = ({
 const styles = {
   inner: css`
     display: flex;
-    flex-direction: column;
-    padding: 16px;
-    gap: 8px;
     width: 100%;
-  `,
-  row1: css`
-    display: flex;
+    height: 100%;
     justify-content: space-between;
   `,
-  clientWrapper: css`
+  left: css`
+    display: flex;
+    flex-direction: column;
+    padding: 16px;
+  `,
+  partnerWrapper: css`
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 12px;
   `,
   chipsContainer: css`
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
     margin-top: 12px;
+  `,
+  certificationWrapper: (isCorporate: boolean) => css`
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    visibility: ${!isCorporate && "hidden"};
   `,
 };
 
@@ -96,9 +99,11 @@ const RootButton = (p: ButtonProps) => (
     sx={{
       padding: 0,
       minWidth: 0,
+      height: "140px",
       textAlign: "start",
       borderRadius: Shape.Medium,
       border: "1px solid #eee",
+      overflow: "hidden",
     }}
     {...p}
   />
@@ -106,35 +111,11 @@ const RootButton = (p: ButtonProps) => (
 
 const StyledAvatar = (p: AvatarProps) => (
   <Avatar
-    sx={{ width: "24px", height: "24px", border: "1px solid #eee" }}
+    sx={{ width: "40px", height: "40px", border: "1px solid #eee" }}
     {...p}
   />
 );
 
-const UserName = (p: TypographyProps) => (
-  <Typography
-    variant={"caption"}
-    color={"text.primary"}
-    fontWeight={700}
-    sx={{ opacity: 0.7 }}
-    {...p}
-  />
-);
-
-const Title = (p: TypographyProps) => (
-  <Typography
-    variant="subtitle1"
-    color={"text.secondary"}
-    fontWeight={700}
-    {...p}
-  />
-);
-
-const DeadLine = (p: TypographyProps) => (
-  <Typography
-    variant={"caption"}
-    color={"text.primary"}
-    sx={{ opacity: 0.7 }}
-    {...p}
-  />
+const PartnerName = (p: TypographyProps) => (
+  <Typography variant={"h6"} color={"text.secondary"} fontWeight={700} {...p} />
 );
