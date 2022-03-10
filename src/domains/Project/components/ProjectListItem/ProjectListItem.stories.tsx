@@ -7,7 +7,7 @@ const Meta: ComponentMeta<typeof ProjectListItem> = {
 };
 export default Meta;
 
-export const Card1: ComponentStory<typeof ProjectListItem> = () => (
+export const DeadlineActive: ComponentStory<typeof ProjectListItem> = () => (
   <ProjectListItem
     title={"Android 모바일 앱 개발 및 백엔드 외주"}
     userAvatar={
@@ -33,33 +33,7 @@ export const Card1: ComponentStory<typeof ProjectListItem> = () => (
   />
 );
 
-export const Card2: ComponentStory<typeof ProjectListItem> = () => (
-  <ProjectListItem
-    title={"SwiftUi 기반 iOS 모바일 앱 개발"}
-    userAvatar={
-      "https://contents.sixshop.com/thumbnails/uploadedFiles/25109/product/image_1541385514173_750.jpg"
-    }
-    username={"Apple"}
-    restDeadline={3}
-    chipModels={[
-      {
-        label: "안전거래",
-        chipProps: { color: "primary" },
-      },
-      {
-        label: "개발기간 일주일",
-      },
-      {
-        label: "300 ~ 1000 만원",
-      },
-      {
-        label: "경력 5년 이상",
-      },
-    ]}
-  />
-);
-
-export const Card3: ComponentStory<typeof ProjectListItem> = () => (
+export const DeadlineInactive: ComponentStory<typeof ProjectListItem> = () => (
   <ProjectListItem
     title={"Micro service AWS Cloud 환경 구축 및 테스트"}
     userAvatar={
