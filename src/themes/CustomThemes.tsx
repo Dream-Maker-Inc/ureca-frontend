@@ -53,9 +53,8 @@ export const lightTheme = createTheme({
     MuiChip: {
       styleOverrides: {
         sizeSmall: {
-          height: "22px",
           fontSize: "12px",
-          padding: "0px 6px",
+          padding: "4px 8px",
         },
       },
     },
