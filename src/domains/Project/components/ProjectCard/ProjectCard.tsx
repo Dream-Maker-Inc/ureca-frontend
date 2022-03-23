@@ -100,8 +100,6 @@ const styles = {
   `,
 };
 
-const Root = () => {};
-
 const StyledButton = (p: ButtonProps) => (
   <Button
     sx={{
