@@ -1,12 +1,6 @@
 import { PasswordTextField2 } from "@/common/components/inputs/PasswordTextField2";
 import { css } from "@emotion/react";
-import {
-  Button,
-  ButtonProps,
-  TextField,
-  Typography,
-  TypographyProps,
-} from "@mui/material";
+import { TextField, Typography, TypographyProps } from "@mui/material";
 import { FieldHeader } from "../FieldHeader";
 import { PhoneAuthFields } from "../PhoneAuthFields";
 import { useBasicForm } from "./useBasicForm";
@@ -147,12 +141,4 @@ const styles = {
 
 const SmallCaption = (p: TypographyProps) => (
   <Typography variant="caption" fontSize={"10px"} fontWeight={100} {...p} />
-);
-
-const PhoneAuthConfirmButton = (p: ButtonProps) => (
-  <Button
-    variant="outlined"
-    sx={{ whiteSpace: "nowrap", minWidth: "80px", height: "56px" }}
-    {...p}
-  />
 );
