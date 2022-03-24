@@ -38,6 +38,7 @@ export const ProjectCard = ({
     priceCount,
     deadlineCount
   );
+
   return (
     <StyledButton onClick={onClick}>
       <article css={styles.inner}>
