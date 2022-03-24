@@ -4,12 +4,15 @@ import type { AppProps } from "next/app";
 import "@/common/styles/globals.css";
 import "swiper/swiper.min.css";
 import "swiper/components/pagination/pagination.min.css";
+import { RecoilRoot } from "recoil";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <ThemeProvider theme={findTheme(ThemeTypes.Light)}>
-      <Component {...pageProps} />
-    </ThemeProvider>
+    <RecoilRoot>
+      <ThemeProvider theme={findTheme(ThemeTypes.Light)}>
+        <Component {...pageProps} />
+      </ThemeProvider>
+    </RecoilRoot>
   );
 }
 

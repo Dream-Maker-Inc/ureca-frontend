@@ -1,0 +1,1 @@
+export { TermsForm } from "./TermsForm";
