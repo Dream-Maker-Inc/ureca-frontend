@@ -3,7 +3,7 @@ import { verticalScrollable } from "@/common/styles/Scrollable";
 import { css } from "@emotion/react";
 import CloseRounded from "@mui/icons-material/CloseRounded";
 import { IconButton, Tooltip } from "@mui/material";
-import { VerifyPhone, VerifyPhoneCode } from "../../../Phone";
+import { VerifyPhone, VerifyPhoneCode } from "../../../../Phone";
 import { SignupScene } from "../../types/SignupScene.type";
 import { BasicInfoForm } from "../BasicInfoForm";
 import { WelcomeView } from "../WelcomeView";

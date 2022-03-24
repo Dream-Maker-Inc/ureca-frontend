@@ -1,0 +1,17 @@
+import { Meta, Canvas, Story, ArgsTable } from "@storybook/addon-docs";
+import { SignupBasicInfoView } from ".";
+import { RecoilRoot } from "recoil";
+
+<Meta title="Signup/Basic Info View" component={SignupBasicInfoView} />
+
+# Basic Info View
+
+회원가입 기본 정보 수집 뷰
+
+<Canvas>
+  <Story name="Default">
+    <SignupBasicInfoView />
+  </Story>
+</Canvas>
+
+<ArgsTable />
