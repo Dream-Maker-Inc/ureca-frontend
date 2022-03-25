@@ -29,5 +29,3 @@ export const CorporateUserGuide = () => {
     </Stack>
   );
 };
-
-const styles = {};
