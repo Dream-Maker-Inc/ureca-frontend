@@ -1,0 +1,1 @@
+export { SignupBasicInfoView } from "./SignupBasicInfoView";

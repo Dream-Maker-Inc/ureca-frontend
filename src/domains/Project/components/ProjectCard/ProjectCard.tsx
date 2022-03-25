@@ -1,155 +1,100 @@
-import { Shape } from "@/themes/Shape";
+
 import { css } from "@emotion/react";
-import Chip from "@mui/material/Chip";
+import Chip, { ChipProps } from "@mui/material/Chip";
+import Typography, { TypographyProps } from "@mui/material/Typography";
 import Image from "next/image";
-import BusinessCenterIcon from "@mui/icons-material/BusinessCenter";
-import ApartmentIcon from "@mui/icons-material/Apartment";
 
-import {
-  Button,
-  ButtonProps,
-  Typography,
-  TypographyProps,
-  ChipProps,
-} from "@mui/material";
-import { useProjectCard } from "./useProjectCard";
-
-export type tagsModel = {
-  label: string;
-  icon: string;
+export type ProjectCardModel = {
+  thumbnail: string;
+  title: string;
+  contents: string[];
+  options: {
+    icon: JSX.Element;
+    label: string;
+  }[];
 };
 
 export type ProjectCardProps = {
-  cardImage: string;
-  title: string;
-  priceCount: number;
-  deadlineCount: number;
-  tags: tagsModel[];
+  model: ProjectCardModel;
+  minWidth?: string;
 };
 
 export const ProjectCard = ({
-  cardImage,
-  title,
-  priceCount,
-  deadlineCount,
-  tags,
+  model,
+  minWidth = "300px",
 }: ProjectCardProps) => {
-  const { price, deadline, onClick } = useProjectCard(
-    priceCount,
-    deadlineCount
-  );
+  const { thumbnail, title, contents, options } = model;
 
   return (
-    <StyledButton onClick={onClick}>
-      <article css={styles.inner}>
-        <section css={styles.imgContainer}>
-          <Image
-            src={cardImage}
-            alt=""
-            layout="fill"
-            css={styles.imgWrapper}
-          ></Image>
-        </section>
-        <section css={styles.contentContainer}>
-          <Title>{title}</Title>
-          <Price>{price.text}</Price>
-          <Deadline>{deadline.text}</Deadline>
-          <div css={styles.tagsContainer}>
-            {tags.map((it, index) => (
-              <StyledChip
-                key={it.label + index}
-                icon={<ApartmentIcon />}
-                label={it.label}
-              />
+    <article css={styles.root(minWidth)}>
+      <section css={styles.thumbnail}>
+        <Image layout={"fill"} src={thumbnail} alt={"thumbnail"} />
+      </section>
+
+      <section css={styles.contents}>
+        <dl>
+          <MetaDataTitle>{title}</MetaDataTitle>
+
+          <div css={styles.metaData}>
+            {contents.map((it, index) => (
+              <MetaData key={index}>{it}</MetaData>
             ))}
           </div>
-        </section>
-      </article>
-    </StyledButton>
+        </dl>
+
+        <ul css={styles.chips}>
+          {options.map((it, index) => (
+            <li key={index}>
+              <StyledChip avatar={it.icon} label={it.label} />
+            </li>
+          ))}
+        </ul>
+      </section>
+    </article>
   );
 };
 
 const styles = {
-  inner: css`
-    width: 260px;
-    display: flex;
-    flex-direction: column;
-    position: "relative";
-  `,
-  imgContainer: css`
-    width: 100%;
-    aspect-ratio: 1/1;
-  `,
 
-  imgWrapper: css`
+  root: (minWidth: string) => css`
+    width: ${minWidth};
+
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 1px 4px #ddd;
+    overflow: hidden;
+  `,
+  thumbnail: css`
+    position: relative;
     width: 100%;
     aspect-ratio: 1/1;
-    border-top-left-radius: 8px;
-    border-top-right-radius: 8px;
   `,
-  contentContainer: css`
-    width: 100%;
+  contents: css`
     display: flex;
     flex-direction: column;
-    gap: 4px;
-    padding: 12px;
+    padding: 16px;
+    border-top: 1px solid #eee;
   `,
-  tagsContainer: css`
-    width: 100%;
+  metaData: css`
+    margin-top: 4px;
+    opacity: 0.6;
+  `,
+  chips: css`
     display: flex;
+    flex-wrap: wrap;
     gap: 8px;
+    margin-top: 16px;
   `,
 };
 
-const StyledButton = (p: ButtonProps) => (
-  <Button
-    sx={{
-      padding: 0,
-      minWidth: 0,
-      textAlign: "start",
-      borderRadius: Shape.Medium,
-      border: "1px solid #eee",
-      boxShadow: "0 2px 3px 0 rgba(0, 0, 0, 0.5);",
-    }}
-    {...p}
-  />
+const MetaDataTitle = (p: TypographyProps) => (
+  <Typography component={"dt"} {...p} />
 );
 
-const Title = (p: TypographyProps) => (
-  <Typography
-    variant={"subtitle2"}
-    color={"text.secondary"}
-    sx={{ opacity: 0.9 }}
-    {...p}
-  />
-);
-const Price = (p: TypographyProps) => (
-  <Typography
-    variant={"caption"}
-    color={"text.primary"}
-    fontWeight={700}
-    sx={{ opacity: 0.8 }}
-    {...p}
-  />
-);
-const Deadline = (p: TypographyProps) => (
-  <Typography
-    variant={"caption"}
-    color={"text.primary"}
-    fontWeight={700}
-    sx={{ opacity: 0.8, marginBottom: "12px" }}
-    {...p}
-  />
+const MetaData = (p: TypographyProps) => (
+  <Typography component={"dd"} variant="body2" {...p} />
 );
 
 const StyledChip = (p: ChipProps) => (
-  <Chip
-    size="small"
-    sx={{
-      padding: "4px",
-      fontSize: "8px",
-      fontWeight: "700",
-    }}
-    {...p}
-  />
+  <Chip size={"small"} sx={{ opacity: 0.8 }} {...p} />
 );
