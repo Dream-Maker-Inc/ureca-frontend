@@ -5,7 +5,8 @@ import { useRecoilState } from "recoil";
 
 export const useBasicForm = () => {
   const [signupForm, setSignupForm] = useRecoilState(SignupFormAtom);
-  const { loginId, pw, pwConfirm, username, email } = signupForm;
+  const { loginId, pw, pwConfirm, username, email, phone, validation } =
+    signupForm;
 
   // 로그인 아이디 영역
   const [notValidLoginId, setNotValidLoginId] = useState(false);
@@ -30,6 +31,16 @@ export const useBasicForm = () => {
   // 유저 이름 영역
   const handleUsernameChange = (e: ChangeEvent<HTMLInputElement>) =>
     setSignupForm((old) => ({ ...old, username: e.target.value }));
+
+  // 휴대폰 번호 검증 영역
+  const handlePhoneChange = (e: ChangeEvent<HTMLInputElement>) =>
+    setSignupForm((old) => ({ ...old, phone: e.target.value }));
+
+  const handleVerifiedPhoneChange = (isVerifiedPhone: boolean) =>
+    setSignupForm((old) => ({
+      ...old,
+      validation: { ...old.validation, isVerifiedPhone },
+    }));
 
   // 이메일 영역
   const handleEmailChange = (e: ChangeEvent<HTMLInputElement>) =>
@@ -81,6 +92,14 @@ export const useBasicForm = () => {
     usernameState: {
       value: username,
       onChange: handleUsernameChange,
+    },
+    phoneState: {
+      value: phone,
+      onChange: handlePhoneChange,
+    },
+    verifiedPhoneState: {
+      value: validation.isVerifiedPhone,
+      onChange: handleVerifiedPhoneChange,
     },
     emailState: {
       value: email,

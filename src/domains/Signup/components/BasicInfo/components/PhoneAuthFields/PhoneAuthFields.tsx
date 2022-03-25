@@ -7,11 +7,23 @@ import {
   Typography,
   TypographyProps,
 } from "@mui/material";
+import { ChangeEvent } from "react";
 import { FieldHeader } from "../FieldHeader";
 import { usePhoneAuthFields } from "./usePhoneAuthFields";
 
-export const PhoneAuthFields = () => {
-  const { phoneState, verifyCodeState } = usePhoneAuthFields();
+export type PhoneAuthFieldsProps = {
+  phoneState: {
+    value: string;
+    onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  };
+  verifiedPhoneState: {
+    value: boolean;
+    onChange: (isVerified: boolean) => void;
+  };
+};
+
+export const PhoneAuthFields = (p: PhoneAuthFieldsProps) => {
+  const { phoneState, verifyCodeState } = usePhoneAuthFields(p);
 
   return (
     <section css={styles.formFieldContainer}>

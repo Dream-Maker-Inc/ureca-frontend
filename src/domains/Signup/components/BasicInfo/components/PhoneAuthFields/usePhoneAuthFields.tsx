@@ -1,12 +1,13 @@
 import { SignupPolicy } from "@/common/policies";
-import { SignupFormAtom } from "@/recoil/Signup";
 import { ChangeEvent, useEffect } from "react";
-import { useRecoilState } from "recoil";
+import { PhoneAuthFieldsProps } from "./PhoneAuthFields";
 import { useVerifyCode } from "./useVerifyCode";
 
-export const usePhoneAuthFields = () => {
-  const [basicForm, setBasicForm] = useRecoilState(SignupFormAtom);
-  const { phone } = basicForm;
+export const usePhoneAuthFields = ({
+  phoneState,
+  verifiedPhoneState,
+}: PhoneAuthFieldsProps) => {
+  const { value: phone, onChange: onPhoneChange } = phoneState;
 
   // 휴대폰 번호 검증 영역
   const {
@@ -24,7 +25,7 @@ export const usePhoneAuthFields = () => {
   } = useVerifyCode();
 
   const handlePhoneChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setBasicForm((old) => ({ ...old, phone: e.target.value }));
+    onPhoneChange(e);
     invalideSendedVerifyState();
   };
   const isValidPhone = SignupPolicy.validatePhoneNumber(phone);
@@ -33,15 +34,13 @@ export const usePhoneAuthFields = () => {
     !!phone && (!isValidPhone || isSendedVerifyCode);
 
   useEffect(() => {
-    setBasicForm((old) => ({
-      ...old,
-      validation: { ...old.validation, isVerifiedPhone: isVerifiedCode },
-    }));
-  }, [isVerifiedCode, setBasicForm]);
+    verifiedPhoneState.onChange(isVerifiedCode);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isVerifiedCode]);
 
   return {
     phoneState: {
-      value: phone,
+      value: phoneState.value,
       onChange: handlePhoneChange,
       helper: {
         visible: visiblePhoneHelperText,

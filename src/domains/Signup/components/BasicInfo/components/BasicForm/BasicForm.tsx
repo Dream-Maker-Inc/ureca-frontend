@@ -6,8 +6,15 @@ import { PhoneAuthFields } from "../PhoneAuthFields";
 import { useBasicForm } from "./useBasicForm";
 
 export const BasicForm = () => {
-  const { loginState, pwState, pwConfirmState, usernameState, emailState } =
-    useBasicForm();
+  const {
+    loginState,
+    pwState,
+    pwConfirmState,
+    usernameState,
+    emailState,
+    phoneState,
+    verifiedPhoneState,
+  } = useBasicForm();
 
   return (
     <form css={styles.basicForm}>
@@ -90,7 +97,10 @@ export const BasicForm = () => {
         />
       </div>
 
-      <PhoneAuthFields />
+      <PhoneAuthFields
+        phoneState={phoneState}
+        verifiedPhoneState={verifiedPhoneState}
+      />
 
       <div css={styles.formFieldWrapper}>
         <FieldHeader
