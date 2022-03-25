@@ -6,10 +6,14 @@ import React from "react";
 import { useForm, Controller } from "react-hook-form";
 import { css } from "@emotion/react";
 import { SignupPolicy } from "@/common/policies";
+import ToggleButton from "@mui/material/ToggleButton";
+import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
+import { CompanySignupFormAtom } from "@/recoil/CompanySignUp";
+import { atom, useRecoilState } from "recoil";
+
 import {
   Stack,
   TextField,
-  ButtonGroup,
   Button,
   ButtonProps,
   Typography,
@@ -33,12 +37,13 @@ export type TextFieldWithButton = {
 
 interface IFrom {
   brandName: string;
-  businessCert: string;
+  businessNum: string;
   repName: string;
   repNum: string;
   siteAddress: string;
   emailAddress: string;
   firstName: string;
+  toggle: string;
 }
 
 const CompanySignUp = () => {
@@ -46,9 +51,22 @@ const CompanySignUp = () => {
     register,
     handleSubmit,
     control,
-    formState: { errors },
-  } = useForm<IFrom>({ mode: "all" });
-  const onValid = (data: IFrom) => {};
+    watch,
+    setValue,
+    getValues,
+    formState: { errors, isDirty, isValid },
+  } = useForm({
+    mode: "all",
+    reValidateMode: "onChange",
+  });
+
+  const onValid = (data: any) => {
+    console.log(data);
+  };
+
+  const [businessNumValid, setBusinessNumValid] = useRecoilState(
+    CompanySignupFormAtom
+  );
 
   return (
     <div css={styles.root}>
@@ -57,55 +75,142 @@ const CompanySignUp = () => {
         <form onSubmit={handleSubmit(onValid)}>
           <div css={styles.subContainer}>
             <SubTitle>부가 정보</SubTitle>
-            <Controller
-              name="brandName"
-              control={control}
-              render={() => (
-                <Stack>
-                  <FormSubTitle
-                    title="상호명"
-                    desc="사업자등록증상 상호명을 입력해 주세요."
-                  />
-                  <TextField
-                    id="outlined-basic"
-                    placeholder="상호명을 입력하세요."
-                    variant="outlined"
-                    helperText={
-                      <SmallCaption color={"error"}>
-                        {errors?.brandName?.message}
-                      </SmallCaption>
-                    }
-                    {...register("brandName", {
-                      required: "상호명을 입력하세요",
-                    })}
-                  />
-                </Stack>
-              )}
-            />
+
             <Stack>
               <FormSubTitle
                 title="상호명"
                 desc="사업자등록증상 상호명을 입력해 주세요."
+                required={true}
               />
-              <TwinButtonGroup firstVal="기업" secondVal="법인" />
+
+              <TextField
+                id="outlined-basic"
+                placeholder="상호명을 입력하세요."
+                variant="outlined"
+                helperText={
+                  <SmallCaption color={"error"}>
+                    {errors?.brandName?.message}
+                  </SmallCaption>
+                }
+                {...register("brandName", {
+                  required: "상호명을 입력하세요",
+                })}
+              />
             </Stack>
+
             <Stack>
               <FormSubTitle
-                title="사업자 인증"
-                desc="사업자등록번호를 입력하신 후 인증 버튼을 클릭해 주세요."
+                title="기업형태"
+                desc="개인과 법인 중 선택해 주세요. 주식회사는 법인을 선택하시면 됩니다."
+                required={true}
               />
-              <TextFieldWithButton
-                placeholder="사업자등록번호를 입력하세요."
-                btnText="인증하기"
+              <Controller
+                name="toggle"
+                rules={{ required: true }}
+                defaultValue=""
+                render={() => {
+                  return (
+                    <ToggleButtonGroup
+                      color="primary"
+                      fullWidth
+                      size="large"
+                      exclusive
+                      value={getValues("toggle")}
+                      onChange={(e, value) => {
+                        if (value !== null) {
+                          setValue("toggle", value);
+                        }
+                      }}
+                    >
+                      <ToggleButton value="personal">개인</ToggleButton>
+                      <ToggleButton value="business">법인</ToggleButton>
+                    </ToggleButtonGroup>
+                  );
+                }}
+                control={control}
               />
             </Stack>
-            <TextFieldWithLabel
-              formSubTitleProps={{
-                title: "대표자명",
-                desc: "사업자등록증상 대표자명을 입력해 주세요.",
-              }}
-              placeholder="대표자명을 입력하세요."
+
+            <Controller
+              name="businessNum"
+              control={control}
+              render={() => (
+                <Stack>
+                  <FormSubTitle
+                    title="사업자 인증"
+                    desc="사업자등록번호를 입력하신 후 인증 버튼을 클릭해 주세요."
+                    required={true}
+                  />
+                  <Stack direction="row">
+                    <TextField
+                      id="outlined-basic"
+                      placeholder="사업자등록번호를 입력하세요."
+                      variant="outlined"
+                      disabled={!businessNumValid}
+                      sx={{ width: "100%", marginRight: "12px" }}
+                      inputProps={{ maxLength: 12 }}
+                      helperText={
+                        <Stack direction="row">
+                          <SmallCaption color={"error"}>
+                            {errors?.businessNum?.message}
+                          </SmallCaption>
+                          <SmallCaption color={"primary"}>
+                            {!businessNumValid ? "인증되었어요" : ""}
+                          </SmallCaption>
+                        </Stack>
+                      }
+                      {...register("businessNum", {
+                        required: true,
+
+                        validate: {
+                          businessNumReg: (value) =>
+                            SignupPolicy.validateBusinessNum(value) ||
+                            value === ""
+                              ? true
+                              : "사업자등록번호 형식에 맞지 않아요.",
+                        },
+                      })}
+                    />
+                    <Button
+                      variant="outlined"
+                      disabled={!businessNumValid}
+                      onClick={() => {
+                        const value = getValues("businessNum");
+                        SignupPolicy.validateBusinessNum(value)
+                          ? setBusinessNumValid((old) => !old)
+                          : false;
+                        console.log({ businessNumValid });
+                      }}
+                      size="large"
+                      sx={{ width: "40%", height: "58px" }}
+                    >
+                      인증하기
+                    </Button>
+                  </Stack>
+                </Stack>
+              )}
             />
+
+            <Stack>
+              <FormSubTitle
+                title="대표자명"
+                desc="전문가 상세 정보에 표시할 회사 대표 번호를 입력해 주세요."
+                required={true}
+              />
+              <TextField
+                id="outlined-basic"
+                placeholder="대표번호를 입력하세요."
+                variant="outlined"
+                helperText={
+                  <SmallCaption color={"error"}>
+                    {errors?.repName?.message}
+                  </SmallCaption>
+                }
+                {...register("repName", {
+                  required: "대표자명을 입력하세요",
+                })}
+              />
+            </Stack>
           </div>
           <hr css={styles.hr} />
           <div css={styles.subContainer}>
@@ -118,6 +223,7 @@ const CompanySignUp = () => {
                   <FormSubTitle
                     title="대표번호"
                     desc="전문가 상세 정보에 표시할 회사 대표 번호를 입력해 주세요."
+                    required={false}
                   />
                   <TextField
                     id="outlined-basic"
@@ -129,31 +235,14 @@ const CompanySignUp = () => {
                       </SmallCaption>
                     }
                     {...register("repNum", {
-                      required: "대표번호를 입력하세요",
+                      validate: {
+                        repNumReg: (value) =>
+                          SignupPolicy.validatePhoneNumber(value) ||
+                          value === ""
+                            ? true
+                            : "전화 번호 형식에 맞지 않아요.",
+                      },
                     })}
-                  />
-                </Stack>
-              )}
-            />
-            <Controller
-              name="siteAddress"
-              control={control}
-              render={() => (
-                <Stack>
-                  <FormSubTitle
-                    title="홈페이지 주소"
-                    desc="전문가 상세 정보에 표시할 홈페이지 주소를 입력해 주세요."
-                  />
-                  <TextField
-                    id="outlined-basic"
-                    placeholder="홈페이지 주소를 입력하세요."
-                    variant="outlined"
-                    helperText={
-                      <SmallCaption color={"error"}>
-                        {errors?.siteAddress?.message}
-                      </SmallCaption>
-                    }
-                    {...register("siteAddress")}
                   />
                 </Stack>
               )}
@@ -161,8 +250,35 @@ const CompanySignUp = () => {
 
             <Stack>
               <FormSubTitle
+                title="홈페이지 주소"
+                desc="전문가 상세 정보에 표시할 홈페이지 주소를 입력해 주세요."
+                required={false}
+              />
+              <TextField
+                id="outlined-basic"
+                placeholder="홈페이지 주소를 입력하세요."
+                variant="outlined"
+                helperText={
+                  <SmallCaption color={"error"}>
+                    {errors?.siteAddress?.message}
+                  </SmallCaption>
+                }
+                {...register("siteAddress", {
+                  validate: {
+                    siteReg: (value) =>
+                      SignupPolicy.validateSite(value) || value === ""
+                        ? true
+                        : "http:// 또는 https:// 로 시작하는 정보를 입력해 주세요.",
+                  },
+                })}
+              />
+            </Stack>
+
+            <Stack>
+              <FormSubTitle
                 title="이메일"
                 desc="전문가 상세 정보에 표시할 홈페이지 주소를 입력해 주세요."
+                required={false}
               />
               <TextField
                 id="outlined-basic"
@@ -175,14 +291,25 @@ const CompanySignUp = () => {
                 }
                 {...register("emailAddress", {
                   validate: {
-                    noNico: (value) =>
-                      value.includes("nico") ? "no nicos allowed" : true,
+                    emailReg: (value) =>
+                      SignupPolicy.validateEmail(value) || value === ""
+                        ? true
+                        : "이메일 형식이 다릅니다.",
                   },
                 })}
               />
             </Stack>
-
-            <JoinButton variant="outlined">가입하기</JoinButton>
+            <Button
+              type="submit"
+              sx={{
+                height: "56px",
+                fontSize: "16px",
+              }}
+              disabled={!isDirty || !isValid || businessNumValid}
+              variant="outlined"
+            >
+              가입하기
+            </Button>
           </div>
         </form>
       </div>
@@ -213,6 +340,7 @@ const styles = {
     width: 100%;
     color: "black";
     opacity: 0.2;
+    margin: 40px 0;
   `,
 };
 
@@ -262,21 +390,6 @@ const JoinButton = (p: ButtonProps) => (
     }}
     {...p}
   />
-);
-
-const TwinButtonGroup = ({ firstVal, secondVal }: TwinButtonGroupProps) => (
-  <ButtonGroup
-    variant="outlined"
-    aria-label="outlined button group"
-    size="large"
-  >
-    <Button sx={{ width: "100%", height: "56px", fontSize: "16px" }}>
-      {firstVal}
-    </Button>
-    <Button sx={{ width: "100%", height: "56px", fontSize: "16px" }}>
-      {secondVal}
-    </Button>
-  </ButtonGroup>
 );
 
 const TextFieldWithButton = ({ btnText, placeholder }: TextFieldWithButton) => (
