@@ -1,4 +1,3 @@
-
 import { css } from "@emotion/react";
 import Chip, { ChipProps } from "@mui/material/Chip";
 import Typography, { TypographyProps } from "@mui/material/Typography";
@@ -55,7 +54,6 @@ export const ProjectCard = ({
 };
 
 const styles = {
-
   root: (minWidth: string) => css`
     width: ${minWidth};
 
