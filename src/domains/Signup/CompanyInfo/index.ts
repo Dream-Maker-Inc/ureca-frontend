@@ -1,1 +1,1 @@
-export { SignupCompanyInfoView } from "./components/SignupCompanyInfoView";
+export { CompanyInfoView as SignupCompanyInfoView } from "./components/CompanyInfoView";

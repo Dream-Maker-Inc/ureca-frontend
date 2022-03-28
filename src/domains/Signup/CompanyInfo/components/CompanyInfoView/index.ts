@@ -1,0 +1,1 @@
+export { CompanyInfoView } from "./CompanyInfoView";

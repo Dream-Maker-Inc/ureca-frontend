@@ -1,7 +1,7 @@
 import { SignupFormAtom, SignupFormModel } from "@/recoil/Signup";
 import { useRecoilValue } from "recoil";
 
-export const useSignupBasicInfoView = () => {
+export const useBasicInfoView = () => {
   const signupForm = useRecoilValue(SignupFormAtom);
   const validationPassed = validateForm(signupForm);
 

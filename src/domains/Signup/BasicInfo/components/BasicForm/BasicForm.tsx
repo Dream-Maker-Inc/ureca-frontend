@@ -1,12 +1,12 @@
 import { PasswordTextField2 } from "@/common/components/inputs/PasswordTextField2";
+import { FormTitle } from "@/domains/Signup/common/components/FormTitle";
 import { FieldHeaderWithContent } from "@/domains/Signup/common/components/templates/FieldHeaderWithContent";
 import { signupStyles } from "@/domains/Signup/common/styles/Signup.style";
-import { TextField, Typography } from "@mui/material";
+import { css } from "@emotion/react";
+import { TextField } from "@mui/material";
 import { SmallCaption } from "../../../common/components/SmallCaption";
 import { PhoneAuthFields } from "../PhoneAuthFields";
 import { useBasicForm } from "./useBasicForm";
-import { css } from "@emotion/react";
-import { FormTitle } from "@/domains/Signup/common/components/FormTitle";
 
 export const BasicForm = () => {
   const {
@@ -36,8 +36,8 @@ export const BasicForm = () => {
           fullWidth
           placeholder="아이디를 입력하세요."
           helperText={
-            <SmallCaption color={"error"}>
-              {loginState.helper.error && loginState.helper.text}
+            <SmallCaption color={loginState.helper.color}>
+              {loginState.helper.text}
             </SmallCaption>
           }
           value={loginState.value}
@@ -57,8 +57,8 @@ export const BasicForm = () => {
           <PasswordTextField2
             placeholder="비밀번호를 입력하세요."
             helperText={
-              <SmallCaption color={pwState.helper.errorColor}>
-                {pwState.helper.visible && pwState.helper.text}
+              <SmallCaption color={pwState.helper.color}>
+                {pwState.helper.text}
               </SmallCaption>
             }
             value={pwState.value}
@@ -76,8 +76,8 @@ export const BasicForm = () => {
           <PasswordTextField2
             placeholder="비밀번호를 다시 입력하세요."
             helperText={
-              <SmallCaption color={pwConfirmState.helper.errorColor}>
-                {pwConfirmState.helper.visible && pwConfirmState.helper.text}
+              <SmallCaption color={pwConfirmState.helper.color}>
+                {pwConfirmState.helper.text}
               </SmallCaption>
             }
             value={pwConfirmState.value}
@@ -118,8 +118,8 @@ export const BasicForm = () => {
           value={emailState.value}
           onChange={emailState.onChange}
           helperText={
-            <SmallCaption color={emailState.helper.errorColor}>
-              {emailState.helper.visible && emailState.helper.text}
+            <SmallCaption color={emailState.helper.color}>
+              {emailState.helper.text}
             </SmallCaption>
           }
         />

@@ -1,1 +1,1 @@
-export { SignupBasicInfoView } from "./components/SignupBasicInfoView";
+export { BasicInfoView as SignupBasicInfoView } from "./components/BasicInfoView";

@@ -1,6 +1,6 @@
 import { SignupPolicy } from "@/common/policies";
 import { SignupFormAtom } from "@/recoil/Signup";
-import { ChangeEvent, useEffect, useState } from "react";
+import { ChangeEvent, useEffect } from "react";
 import { useRecoilState } from "recoil";
 
 export const useBasicForm = () => {
@@ -9,24 +9,44 @@ export const useBasicForm = () => {
     signupForm;
 
   // 로그인 아이디 영역
-  const [notValidLoginId, setNotValidLoginId] = useState(false);
-
   const handleLoginIdChange = (e: ChangeEvent<HTMLInputElement>) => {
     setSignupForm((old) => ({ ...old, loginId: e.target.value }));
-    setNotValidLoginId(false);
+  };
+
+  const loginIdHelper = {
+    color: getHelperTextColor(false),
+    text: "",
   };
 
   // 비밀번호 영역
   const handlePwChange = (e: ChangeEvent<HTMLInputElement>) => {
     setSignupForm((old) => ({ ...old, pw: e.target.value }));
   };
-  const isValidPw = SignupPolicy.validatePassword(pw);
 
+  const isValidPw = SignupPolicy.validatePassword(pw);
+  const isPassedPw = !pw || isValidPw;
+  const pwValidErrorText = !isPassedPw && "사용 할 수 없는 비밀번호 입니다.";
+  const pwHelper = {
+    color: getHelperTextColor(!isValidPw),
+    text: pwValidErrorText,
+  };
+
+  // 비밀번호 확인 영역
   const handlePwConfirmChange = (e: ChangeEvent<HTMLInputElement>) =>
     setSignupForm((old) => ({ ...old, pwConfirm: e.target.value }));
 
   const isComparablePassword = !!pw && !!pwConfirm;
   const isMatchedPw = isComparablePassword && pw === pwConfirm;
+  const getPwConfirmValidErrorText = () => {
+    if (!pwConfirm) return "";
+    return !isMatchedPw
+      ? "비밀번호가 일치하지 않아요."
+      : "비밀번호가 일치해요.";
+  };
+  const pwConfirmHelper = {
+    color: getHelperTextColor(!isMatchedPw),
+    text: getPwConfirmValidErrorText(),
+  };
 
   // 유저 이름 영역
   const handleUsernameChange = (e: ChangeEvent<HTMLInputElement>) =>
@@ -47,6 +67,12 @@ export const useBasicForm = () => {
     setSignupForm((old) => ({ ...old, email: e.target.value }));
 
   const isValidEmail = SignupPolicy.validateEmail(email);
+  const isPassedEmail = !email || isValidEmail;
+  const emailValidErrorText = !isPassedEmail && "이메일 형식이 다릅니다.";
+  const emailHelper = {
+    color: getHelperTextColor(!isValidEmail),
+    text: emailValidErrorText,
+  };
 
   // side effect
   useEffect(() => {
@@ -65,30 +91,17 @@ export const useBasicForm = () => {
     loginState: {
       value: loginId,
       onChange: handleLoginIdChange,
-      helper: {
-        error: notValidLoginId,
-        text: "사용 할 수 없는 아이디 입니다.",
-      },
+      helper: loginIdHelper,
     },
     pwState: {
       value: pw,
       onChange: handlePwChange,
-      helper: {
-        visible: !!pw && !isValidPw,
-        errorColor: !isValidPw ? "error" : "primary",
-        text: !isValidPw && "사용 할 수 없는 비밀번호 입니다.",
-      },
+      helper: pwHelper,
     },
     pwConfirmState: {
       value: pwConfirm,
       onChange: handlePwConfirmChange,
-      helper: {
-        visible: isComparablePassword,
-        errorColor: !isMatchedPw ? "error" : "primary",
-        text: isMatchedPw
-          ? "비밀번호가 일치해요."
-          : "비밀번호가 일치하지 않아요.",
-      },
+      helper: pwConfirmHelper,
     },
     usernameState: {
       value: username,
@@ -105,11 +118,10 @@ export const useBasicForm = () => {
     emailState: {
       value: email,
       onChange: handleEmailChange,
-      helper: {
-        visible: !!email && !isValidEmail,
-        errorColor: !isValidEmail ? "error" : "primary",
-        text: "이메일 형식이 다릅니다.",
-      },
+      helper: emailHelper,
     },
   };
 };
+
+const getHelperTextColor = (isError: boolean): "error" | "primary" =>
+  isError ? "error" : "primary";
