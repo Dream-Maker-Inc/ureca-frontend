@@ -48,6 +48,7 @@ export const useBasicForm = () => {
 
   const isValidEmail = SignupPolicy.validateEmail(email);
 
+  // side effect
   useEffect(() => {
     setSignupForm((old) => ({
       ...old,
@@ -74,7 +75,7 @@ export const useBasicForm = () => {
       onChange: handlePwChange,
       helper: {
         visible: !!pw && !isValidPw,
-        error: !isValidPw,
+        errorColor: !isValidPw ? "error" : "primary",
         text: !isValidPw && "사용 할 수 없는 비밀번호 입니다.",
       },
     },
@@ -83,7 +84,7 @@ export const useBasicForm = () => {
       onChange: handlePwConfirmChange,
       helper: {
         visible: isComparablePassword,
-        error: !isMatchedPw,
+        errorColor: !isMatchedPw ? "error" : "primary",
         text: isMatchedPw
           ? "비밀번호가 일치해요."
           : "비밀번호가 일치하지 않아요.",
@@ -106,7 +107,7 @@ export const useBasicForm = () => {
       onChange: handleEmailChange,
       helper: {
         visible: !!email && !isValidEmail,
-        error: !isValidEmail,
+        errorColor: !isValidEmail ? "error" : "primary",
         text: "이메일 형식이 다릅니다.",
       },
     },

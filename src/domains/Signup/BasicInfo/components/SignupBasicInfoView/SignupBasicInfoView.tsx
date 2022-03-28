@@ -1,7 +1,7 @@
 import { css } from "@emotion/react";
 import { Button, Typography } from "@mui/material";
 import { BasicForm } from "../BasicForm";
-import { CorporateUserGuide } from "../CorporateUserGuide";
+import { CorporateUserGuide } from "../../../common/components/CorporateUserGuide";
 import { TermsForm } from "../TermsForm";
 import { useSignupBasicInfoView } from "./useSignupBasicInfoView";
 

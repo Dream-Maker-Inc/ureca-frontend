@@ -8,7 +8,7 @@ import {
   TypographyProps,
 } from "@mui/material";
 import { ChangeEvent } from "react";
-import { FieldHeader } from "../FieldHeader";
+import { FieldHeader } from "../../../common/components/FieldHeader";
 import { usePhoneAuthFields } from "./usePhoneAuthFields";
 
 export type PhoneAuthFieldsProps = {

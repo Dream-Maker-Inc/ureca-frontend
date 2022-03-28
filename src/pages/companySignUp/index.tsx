@@ -1,8 +1,8 @@
-import { CompanySignUpView } from "@/domains/CompanySignup";
+import { SignupCompanyInfoView } from "@/domains/Signup/CompanyInfo";
 import { NextPage } from "next";
 
 const CompanySignupPage: NextPage = () => {
-  return <CompanySignUpView />;
+  return <SignupCompanyInfoView />;
 };
 
 export default CompanySignupPage;
