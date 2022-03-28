@@ -13,4 +13,9 @@ export const SignupPolicy = {
     /^010-?([0-9]{3,4})-?([0-9]{4})$/.test(phoneNumber),
 
   validateName: (name: string) => /^[가-힣|a-z|A-Z]+$/.test(name),
+
+  validateSite: (site: string) => /^https?:\/\/[\w\-\.]+/g.test(site),
+
+  validateBusinessNum: (businessNum: string) =>
+    /([0-9]{3})-?([0-9]{2})-?([0-9]{5})/.test(businessNum),
 };
