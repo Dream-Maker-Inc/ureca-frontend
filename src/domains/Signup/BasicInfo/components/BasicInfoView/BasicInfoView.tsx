@@ -1,3 +1,4 @@
+import { CorporationRoutePopup } from "@/domains/Signup/common/components/CorporationRoutePopup";
 import { SignupViewTemplate } from "@/domains/Signup/common/components/templates/SignupViewTemplate";
 import { css } from "@emotion/react";
 import { Button } from "@mui/material";
@@ -7,7 +8,7 @@ import { TermsForm } from "../TermsForm";
 import { useBasicInfoView } from "./useBasicInfoView";
 
 export const BasicInfoView = () => {
-  const { signup } = useBasicInfoView();
+  const { signup, corporateRoutePopupProps } = useBasicInfoView();
 
   return (
     <SignupViewTemplate>
@@ -34,6 +35,8 @@ export const BasicInfoView = () => {
           가입하기
         </Button>
       </section>
+
+      <CorporationRoutePopup {...corporateRoutePopupProps} />
     </SignupViewTemplate>
   );
 };

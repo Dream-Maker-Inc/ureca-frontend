@@ -1,3 +1,4 @@
+import { ExternalPath } from "@/constants/Path";
 import { SignupFormAtom } from "@/recoil/Signup";
 import { useEffect, useState } from "react";
 import { useSetRecoilState } from "recoil";
@@ -59,6 +60,10 @@ export const useTermsForm = () => {
     .filter((_, index) => terms[index].requirement)
     .every((it) => it);
 
+  const handleShowTermClick = () =>
+    window.open(ExternalPath.TermHelp, "_blank");
+
+  // side effect
   useEffect(() => {
     setSignupForm((old) => ({
       ...old,
@@ -76,5 +81,6 @@ export const useTermsForm = () => {
     handleAgreedTermChange,
     isAllAgreed,
     handleAllCheckClick,
+    handleShowTermClick,
   };
 };

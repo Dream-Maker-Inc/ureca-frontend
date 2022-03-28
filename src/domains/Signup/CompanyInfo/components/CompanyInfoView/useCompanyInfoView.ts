@@ -1,9 +1,16 @@
 import { SignupPolicy } from "@/common/policies";
 import { CompanyType } from "@/common/policies/Partner/Company.type";
-import { ChangeEvent, useState } from "react";
+import { useFindBrnInfo } from "@/domains/Auth/BRN/hooks/useFindBrnInfo";
+import { TaxPlayerType } from "@/domains/Auth/BRN/services/BRNApi/models/TaxPlayer.type";
+import { SignupApi } from "@/domains/Signup/services/SignupApi";
+import { useRouter } from "next/router";
+import { ChangeEvent, useEffect, useState } from "react";
+import { useMutation } from "react-query";
 import { CompanyInfoFormModel } from "./CompanyInfo.model";
 
 export const useCompanyInfoView = () => {
+  const router = useRouter();
+
   const [formModel, setFormModel] = useState<CompanyInfoFormModel>({
     brandName: "",
     companyType: "private",
@@ -50,12 +57,30 @@ export const useCompanyInfoView = () => {
     setIsConfirmedBrn(false);
   };
 
-  const confirmBrn = () => {
-    alert(`brn:${brn} ok`);
+  const {
+    mutate: mutateBrnInfo,
+    data: brnInfo,
+    isError: brnInfoMutateIsError,
+    error: brnInfoMutateError,
+  } = useFindBrnInfo();
 
-    const tempBrnConfirmed = isValidBrn;
-    setIsConfirmedBrn(tempBrnConfirmed);
+  const confirmBrn = async () => {
+    mutateBrnInfo(brn.replaceAll("-", ""));
   };
+
+  useEffect(() => {
+    if (brnInfoMutateIsError) {
+      console.log(brnInfoMutateError);
+      return alert("사업자번호 조회에 실패했어요, 잠시후 다시 시도해주세요.");
+    }
+
+    if (!brnInfo) return;
+
+    const isValidBrn = brnInfo.taxPlayerType !== TaxPlayerType.Unknown;
+
+    if (!isValidBrn) return alert("등록되지 않은 사업자번호 입니다.");
+    if (isValidBrn) return setIsConfirmedBrn(true);
+  }, [brnInfo, brnInfoMutateError, brnInfoMutateIsError]);
 
   // 대표자명 영역
   const handleOwnerNameChange = (e: ChangeEvent<HTMLInputElement>) =>
@@ -110,9 +135,23 @@ export const useCompanyInfoView = () => {
     isPassedHomepage &&
     isPassedEmail;
 
-  const handleFormSubmit = () => {
-    alert(JSON.stringify(formModel));
-  };
+  // 기업정보 제출
+  const { mutate, isSuccess, isError, error } = useMutation(() =>
+    SignupApi.submitCompanyInfo()
+  );
+  const handleFormSubmit = () => mutate();
+
+  useEffect(() => {
+    if (isSuccess) {
+      alert("기업정보 제출에 성공했어요.");
+      router.replace("/");
+      return;
+    }
+    if (isError) {
+      console.log(error);
+      return alert("기업정보 제출에 실패했어요.");
+    }
+  }, [error, isError, isSuccess, router]);
 
   return {
     brandNameState: {

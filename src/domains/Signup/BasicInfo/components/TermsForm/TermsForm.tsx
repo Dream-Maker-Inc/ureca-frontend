@@ -11,6 +11,7 @@ export const TermsForm = () => {
     handleAgreedTermChange,
     isAllAgreed,
     handleAllCheckClick,
+    handleShowTermClick,
   } = useTermsForm();
 
   return (
@@ -29,7 +30,7 @@ export const TermsForm = () => {
               checked={agreedTerms[index]}
               toggle={() => handleAgreedTermChange(index, !agreedTerms[index])}
               label={it.title}
-              onShowTerm={() => alert("todo popup")}
+              onShowTerm={handleShowTermClick}
               requirement={it.requirement}
             />
           ))}
