@@ -2,6 +2,7 @@ import { SignupPolicy } from "@/common/policies";
 import { CompanyType } from "@/common/policies/Partner/Company.type";
 import { useFindBrnInfo } from "@/domains/Auth/BRN/hooks/useFindBrnInfo";
 import { TaxPlayerType } from "@/domains/Auth/BRN/services/BRNApi/models/TaxPlayer.type";
+import { TaxPlayerState } from "@/domains/Auth/BRN/services/BRNApi/models/TaxPlayerState.type";
 import { SignupApi } from "@/domains/Signup/services/SignupApi";
 import { useRouter } from "next/router";
 import { ChangeEvent, useEffect, useState } from "react";
@@ -76,8 +77,10 @@ export const useCompanyInfoView = () => {
 
     if (!brnInfo) return;
 
-    const isValidBrn = brnInfo.taxPlayerType !== TaxPlayerType.Unknown;
+    if (brnInfo.taxPlayerState === TaxPlayerState.Close)
+      return alert("폐업된 사업자번호는 사용 불가능 합니다.");
 
+    const isValidBrn = brnInfo.taxPlayerType !== TaxPlayerType.Unknown;
     if (!isValidBrn) return alert("등록되지 않은 사업자번호 입니다.");
     if (isValidBrn) return setIsConfirmedBrn(true);
   }, [brnInfo, brnInfoMutateError, brnInfoMutateIsError]);
