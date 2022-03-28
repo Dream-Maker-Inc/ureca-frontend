@@ -1,0 +1,35 @@
+import { Meta, Canvas, Story, ArgsTable } from "@storybook/addon-docs";
+import { CorporationRoutePopup } from ".";
+import { RecoilRoot } from "recoil";
+import { useState } from "react";
+
+<Meta title="Signup/기업회원 여부 팝업" component={CorporationRoutePopup} />
+
+# Corporation Route Popup
+
+기업 회원이신가요? 팝업
+
+<Canvas>
+  <Story name="Default">
+    {() => {
+      const [open, setOpen] = useState(false);
+      return (
+        <div>
+          <button onClick={() => setOpen(true)}>팝업 열기</button>
+          <CorporationRoutePopup
+            popup={{
+              open: open,
+              onClose: () => setOpen(false),
+            }}
+            events={{
+              onNegative: () => alert("negative"),
+              onPositive: () => alert("positive"),
+            }}
+          />
+        </div>
+      );
+    }}
+  </Story>
+</Canvas>
+
+<ArgsTable />
