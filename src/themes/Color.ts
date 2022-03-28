@@ -21,8 +21,8 @@ export const lightPalette: PaletteOptions = {
     main: LightColor.PrimaryDeep,
   },
   text: {
-    primary: LightColor.Grey600,
-    secondary: "#222",
+    primary: "#222",
+    secondary: LightColor.Grey600,
   },
   error: {
     main: LightColor.Danger,
