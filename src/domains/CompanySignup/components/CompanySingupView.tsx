@@ -36,17 +36,6 @@ export type TextFieldWithButton = {
   placeholder: string;
 };
 
-interface IFrom {
-  brandName: string;
-  businessNum: string;
-  repName: string;
-  repNum: string;
-  siteAddress: string;
-  emailAddress: string;
-  firstName: string;
-  toggle: string;
-}
-
 const formatToPhoneNumber = (num: string) => {
   return formatToPhoneNumberWithDash(num);
 };
@@ -55,10 +44,9 @@ export const CompanySignUpView = () => {
   const {
     register,
     handleSubmit,
-    control,
-    watch,
     setValue,
     getValues,
+    control,
     formState: { errors, isDirty, isValid },
   } = useForm({
     mode: "all",
@@ -380,31 +368,6 @@ const Title = (p: TypographyProps) => (
     fontSize={"24px"}
     sx={{
       alignSelf: "center",
-    }}
-    {...p}
-  />
-);
-
-const TextFieldWithLabel = ({
-  formSubTitleProps,
-  placeholder,
-}: TextFieldWithLabelProps) => (
-  <Stack>
-    <FormSubTitle {...formSubTitleProps} />
-    <TextField
-      id="outlined-basic"
-      placeholder={placeholder}
-      variant="outlined"
-    />
-  </Stack>
-);
-
-const JoinButton = (p: ButtonProps) => (
-  <Button
-    type="submit"
-    sx={{
-      height: "56px",
-      fontSize: "16px",
     }}
     {...p}
   />
