@@ -9,8 +9,8 @@ export const useBasicForm = () => {
     signupForm;
 
   // 로그인 아이디 영역
-  const handleLoginIdChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setSignupForm((old) => ({ ...old, loginId: e.target.value }));
+  const handleLoginIdChange = (value: string) => {
+    setSignupForm((old) => ({ ...old, loginId: value }));
   };
 
   const loginIdHelper = {

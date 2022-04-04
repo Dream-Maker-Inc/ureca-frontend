@@ -41,7 +41,7 @@ export const BasicForm = () => {
             </SmallCaption>
           }
           value={loginState.value}
-          onChange={loginState.onChange}
+          onChange={(e) => loginState.onChange(e.target.value)}
         />
       </FieldHeaderWithContent>
 
