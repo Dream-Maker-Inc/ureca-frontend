@@ -23,7 +23,7 @@ const Desc = (p: TypographyProps) => (
 
 const styles = {
   container: css`
-    max-width: 400px;
+    max-width: 800px;
     display: flex;
     justify-content: space-between;
     align-items: center;
