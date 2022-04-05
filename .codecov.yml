@@ -1,4 +1,10 @@
-status:
-  project: yes
-  patch: yes
-  changes: no
+codecov:
+  require_ci_to_pass: true
+
+comment:
+  layout: "reach,diff,flags,files,footer"
+  behavior: default
+  require_changes: false
+  branches:
+    - dev
+    - main
