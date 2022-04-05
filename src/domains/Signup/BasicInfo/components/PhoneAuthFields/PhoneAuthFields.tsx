@@ -7,14 +7,13 @@ import {
   Typography,
   TypographyProps,
 } from "@mui/material";
-import { ChangeEvent } from "react";
 import { FieldHeader } from "../../../common/components/FieldHeader";
 import { usePhoneAuthFields } from "./usePhoneAuthFields";
 
 export type PhoneAuthFieldsProps = {
   phoneState: {
     value: string;
-    onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+    onChange: (value: string) => void;
   };
   verifiedPhoneState: {
     value: boolean;

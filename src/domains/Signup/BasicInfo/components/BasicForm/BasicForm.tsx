@@ -62,7 +62,7 @@ export const BasicForm = () => {
               </SmallCaption>
             }
             value={pwState.value}
-            onChange={pwState.onChange}
+            onChange={(e) => pwState.onChange(e.target.value)}
           />
         </FieldHeaderWithContent>
 
@@ -81,7 +81,7 @@ export const BasicForm = () => {
               </SmallCaption>
             }
             value={pwConfirmState.value}
-            onChange={pwConfirmState.onChange}
+            onChange={(e) => pwConfirmState.onChange(e.target.value)}
           />
         </FieldHeaderWithContent>
       </section>
@@ -97,7 +97,7 @@ export const BasicForm = () => {
           fullWidth
           placeholder="실명을 입력하세요."
           value={usernameState.value}
-          onChange={usernameState.onChange}
+          onChange={(e) => usernameState.onChange(e.target.value)}
         />
       </FieldHeaderWithContent>
 
@@ -116,7 +116,7 @@ export const BasicForm = () => {
           fullWidth
           placeholder="이메일을 입력하세요."
           value={emailState.value}
-          onChange={emailState.onChange}
+          onChange={(e) => emailState.onChange(e.target.value)}
           helperText={
             <SmallCaption color={emailState.helper.color}>
               {emailState.helper.text}

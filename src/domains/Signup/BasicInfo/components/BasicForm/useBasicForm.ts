@@ -19,8 +19,8 @@ export const useBasicForm = () => {
   };
 
   // 비밀번호 영역
-  const handlePwChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setSignupForm((old) => ({ ...old, pw: e.target.value }));
+  const handlePwChange = (value: string) => {
+    setSignupForm((old) => ({ ...old, pw: value }));
   };
 
   const isValidPw = SignupPolicy.validatePassword(pw);
@@ -32,8 +32,8 @@ export const useBasicForm = () => {
   };
 
   // 비밀번호 확인 영역
-  const handlePwConfirmChange = (e: ChangeEvent<HTMLInputElement>) =>
-    setSignupForm((old) => ({ ...old, pwConfirm: e.target.value }));
+  const handlePwConfirmChange = (value: string) =>
+    setSignupForm((old) => ({ ...old, pwConfirm: value }));
 
   const isComparablePassword = !!pw && !!pwConfirm;
   const isMatchedPw = isComparablePassword && pw === pwConfirm;
@@ -49,12 +49,12 @@ export const useBasicForm = () => {
   };
 
   // 유저 이름 영역
-  const handleUsernameChange = (e: ChangeEvent<HTMLInputElement>) =>
-    setSignupForm((old) => ({ ...old, username: e.target.value }));
+  const handleUsernameChange = (value: string) =>
+    setSignupForm((old) => ({ ...old, username: value }));
 
   // 휴대폰 번호 검증 영역
-  const handlePhoneChange = (e: ChangeEvent<HTMLInputElement>) =>
-    setSignupForm((old) => ({ ...old, phone: e.target.value }));
+  const handlePhoneChange = (value: string) =>
+    setSignupForm((old) => ({ ...old, phone: value }));
 
   const handleVerifiedPhoneChange = (isVerifiedPhone: boolean) =>
     setSignupForm((old) => ({
@@ -63,8 +63,8 @@ export const useBasicForm = () => {
     }));
 
   // 이메일 영역
-  const handleEmailChange = (e: ChangeEvent<HTMLInputElement>) =>
-    setSignupForm((old) => ({ ...old, email: e.target.value }));
+  const handleEmailChange = (value: string) =>
+    setSignupForm((old) => ({ ...old, email: value }));
 
   const isValidEmail = SignupPolicy.validateEmail(email);
   const isPassedEmail = !email || isValidEmail;
