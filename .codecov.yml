@@ -8,3 +8,17 @@ comment:
   branches:
     - dev
     - main
+
+coverage:
+  status:
+    project:
+      default:
+        target: auto
+        threshold: 0%
+        base: auto
+        if_not_found: success
+        informational: false
+        only_pulls: false
+        branches:
+          - dev
+          - main
