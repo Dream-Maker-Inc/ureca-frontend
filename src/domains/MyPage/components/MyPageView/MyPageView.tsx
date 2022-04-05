@@ -68,7 +68,7 @@ export const MyPageView = () => {
               </div>
               <div css={styles.innerRightWrapper}>
                 <MyPageInfo title="공지사항 및 주요 정보" desc="받기" />
-                <MyPageInfo title="마케팅 및 홍보 메시지" desc="받기" />
+                <MyPageInfo title="마케팅 및 홍보 메시지" desc="받지 않기" />
               </div>
             </div>
           </div>
