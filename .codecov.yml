@@ -1,4 +1,16 @@
-status:
-  project: yes
-  patch: yes
-  changes: no
+coverage:
+  status:
+    project:
+      default:
+        target: 80%
+        threshold: 0%
+    patch:
+      default:
+        target: 80%
+        threshold: 0%
+    changes: false
+
+comment:
+  layout: "reach,diff,flags,files,footer"
+  behavior: default
+  require_changes: false
