@@ -4,12 +4,13 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next lint && jest && next build",
+    "build": "next lint && yarn test-codecov && next build",
     "export": "next export",
     "start": "next start",
     "lint": "next lint",
     "test": "jest --coverage --watchAll",
     "test-coverage": "jest --coverage",
+    "test-codecov": "jest --ci --coverage && codecov",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
   },
@@ -44,6 +45,7 @@
     "axios": "^0.26.1",
     "babel-loader": "^8.2.3",
     "babel-plugin-import": "^1.13.3",
+    "codecov": "^3.8.3",
     "eslint": "8.10.0",
     "eslint-config-next": "12.1.0",
     "jest": "^27.5.1",
