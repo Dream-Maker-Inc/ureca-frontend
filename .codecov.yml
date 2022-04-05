@@ -1,5 +1,25 @@
 codecov:
-  require_ci_to_pass: true
+  notify:
+    require_ci_to_pass: yes
+
+coverage:
+  status:
+    project:
+      default:
+        target: 80%
+        threshold: 0%
+        base: auto
+        if_not_found: success
+        informational: false
+        only_pulls: false
+    patch:
+      target: 80%
+      threshold: 0%
+      base: auto
+      if_not_found: success
+      informational: false
+      only_pulls: false
+    changes: false
 
 comment:
   layout: "reach,diff,flags,files,footer"
@@ -8,17 +28,3 @@ comment:
   branches:
     - dev
     - main
-
-coverage:
-  status:
-    project:
-      default:
-        target: auto
-        threshold: 0%
-        base: auto
-        if_not_found: success
-        informational: false
-        only_pulls: false
-        branches:
-          - dev
-          - main
