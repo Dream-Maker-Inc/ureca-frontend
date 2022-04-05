@@ -1,3 +1,7 @@
+codecov:
+  notify:
+    require_ci_to_pass: yes
+
 coverage:
   status:
     project:
@@ -11,6 +15,6 @@ coverage:
     changes: false
 
 comment:
-  layout: "reach,diff,flags,files,footer"
+  layout: "reach, diff, flags, files"
   behavior: default
   require_changes: false
