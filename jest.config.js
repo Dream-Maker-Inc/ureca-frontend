@@ -10,6 +10,12 @@ const createJestConfig = nextJest({
 
 // Add any custom config to be passed to Jest
 const customJestConfig = {
+  coveragePathIgnorePatterns: [
+    "index.js",
+    "index.jsx",
+    "index.ts",
+    "index.tsx",
+  ],
   moduleDirectories: ["node_modules", "<rootDir>/"],
   testEnvironment: "jest-environment-jsdom",
   moduleNameMapper: pathsToModuleNameMapper(compilerOptions.paths, {

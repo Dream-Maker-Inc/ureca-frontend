@@ -1,2 +1,2 @@
-export { SignupPolicy } from "./SignupPolicy";
+export { SignupPolicy } from "./Signup";
 export { AuthPhonePolicy } from "./AuthPhonePolicy";
