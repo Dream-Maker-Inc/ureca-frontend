@@ -1,6 +1,6 @@
 import { SignupPolicy } from "@/common/policies";
 import { SignupFormAtom } from "@/recoil/Signup";
-import { ChangeEvent, useEffect } from "react";
+import { useEffect } from "react";
 import { useRecoilState } from "recoil";
 
 export const useBasicForm = () => {
