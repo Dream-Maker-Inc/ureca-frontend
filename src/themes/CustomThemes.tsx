@@ -29,6 +29,10 @@ export const lightTheme = createTheme({
           "& .MuiOutlinedInput-notchedOutline": {
             borderColor: "#e9e9e9",
           },
+
+          "& .Mui-disabled .MuiOutlinedInput-notchedOutline": {
+            borderColor: "#e9e9e9 !important",
+          },
         },
       },
     },
@@ -61,7 +65,6 @@ export const lightTheme = createTheme({
     MuiTypography: {
       styleOverrides: {
         root: {
-          overflow: "hidden",
           textOverflow: "ellipsis",
           display: "-webkit-box",
           WebkitBoxOrient: "vertical",

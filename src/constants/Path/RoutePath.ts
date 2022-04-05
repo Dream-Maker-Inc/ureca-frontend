@@ -3,6 +3,8 @@ export enum RoutePath {
   Portfolios = "/portfolios",
   Projects = "/projects",
   Partners = "/partners",
+  Signup = "/signup",
+  SignupCompanyInfo = "/signup/companyInfo",
 }
 
 export enum MobileRoutePath {}

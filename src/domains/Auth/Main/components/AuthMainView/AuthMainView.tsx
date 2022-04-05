@@ -5,7 +5,7 @@ import {
 } from "@/common/components/swipers/CustomSwiper/CustomSwiper";
 import { useAuthMainView } from "@/domains/Auth/Main/components/AuthMainView/useAuthMainView";
 import { LoginSwiperItem, LoginView } from "@/domains/Auth/Login";
-import { SignupView } from "@/domains/Auth/SignUp";
+import { SignupView } from "@/domains/Auth/old/SignUp";
 import { AuthScene } from "@/domains/Auth/Main/types/AuthScene.type";
 import { verticalScrollable } from "@/common/styles/Scrollable";
 import { LightColor } from "@/themes/Color";

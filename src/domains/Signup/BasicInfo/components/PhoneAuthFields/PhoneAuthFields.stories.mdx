@@ -1,0 +1,32 @@
+import { Meta, Canvas, Story, ArgsTable } from "@storybook/addon-docs";
+import { PhoneAuthFields } from ".";
+import { useState } from "react";
+
+<Meta title="Signup/Phone Auth Fields" component={PhoneAuthFields} />
+
+# Phone Auth Fields
+
+휴대폰 번호 인증 컴포넌트
+
+<Canvas>
+  <Story name="Default">
+    {() => {
+      const [phone, setPhone] = useState("");
+      const [isVerified, setIsVerified] = useState(false);
+      return (
+        <PhoneAuthFields
+          phoneState={{
+            value: phone,
+            onChange: (e) => setPhone(e.target.value),
+          }}
+          verifiedPhoneState={{
+            value: isVerified,
+            onChange: (isVerified) => setIsVerified(isVerified),
+          }}
+        />
+      );
+    }}
+  </Story>
+</Canvas>
+
+<ArgsTable />
