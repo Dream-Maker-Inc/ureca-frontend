@@ -25,7 +25,7 @@ export const usePhoneAuthFields = ({
   } = useVerifyCode();
 
   const handlePhoneChange = (e: ChangeEvent<HTMLInputElement>) => {
-    onPhoneChange(e);
+    onPhoneChange(e.target.value);
     invalideSendedVerifyState();
   };
   const isValidPhone = SignupPolicy.validatePhoneNumber(phone);
