@@ -7,18 +7,18 @@ export type MyPageInfoProps = {
 
 export const MyPageInfo = ({ title, desc }: MyPageInfoProps) => {
   return (
-    <div css={styles.container}>
+    <dl css={styles.container}>
       <Title>{title}</Title>
       <Desc>{desc}</Desc>
-    </div>
+    </dl>
   );
 };
 
 const Title = (p: TypographyProps) => (
-  <Typography variant={"body1"} fontWeight={500} sx={{ opacity: 0.7 }} {...p} />
+  <Typography component={"dt"} variant={"body1"} sx={{ opacity: 0.7 }} {...p} />
 );
 const Desc = (p: TypographyProps) => (
-  <Typography variant={"body1"} fontWeight={700} {...p} />
+  <Typography component={"dd"} variant={"body1"} fontWeight={400} {...p} />
 );
 
 const styles = {
