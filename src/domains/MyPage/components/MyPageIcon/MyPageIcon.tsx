@@ -1,12 +1,11 @@
-import React from "react";
+import { css } from "@emotion/react";
 import {
-  Typography,
-  TypographyProps,
-  Stack,
   Avatar,
   AvatarProps,
+  Typography,
+  TypographyProps,
 } from "@mui/material";
-import { css } from "@emotion/react";
+import React from "react";
 
 export type MyPageIconProps = {
   avatarImage: string;
@@ -20,13 +19,13 @@ export const MyPageIcon = ({
   brandInfoText,
 }: MyPageIconProps) => {
   return (
-    <Stack direction="row" css={styles.inner}>
+    <article css={styles.root}>
       <StyledMyPageIcon src={avatarImage} />
-      <div css={styles.container}>
+      <dl css={styles.container}>
         <BrandName>{brandNameText}</BrandName>
         <BrandInfo>{brandInfoText}</BrandInfo>
-      </div>
-    </Stack>
+      </dl>
+    </article>
   );
 };
 
@@ -35,19 +34,20 @@ const StyledMyPageIcon = (p: AvatarProps) => (
 );
 
 const BrandName = (p: TypographyProps) => (
-  <Typography variant={"h5"} fontWeight={500} {...p} />
+  <Typography component={"dt"} variant={"h6"} {...p} />
 );
 const BrandInfo = (p: TypographyProps) => (
   <Typography
+    component={"dd"}
+    variant="subtitle1"
     color={"text.primary"}
-    fontWeight={400}
-    sx={{ opacity: 0.7, fontSize: "18px" }}
+    sx={{ opacity: 0.4 }}
     {...p}
   />
 );
 
 const styles = {
-  inner: css`
+  root: css`
     display: flex;
     align-items: center;
   `,
