@@ -149,17 +149,7 @@ const TopTitle = (p: TypographyProps) => (
 );
 
 const InfoEditBtn = (p: ButtonProps) => (
-  <Button
-    variant="outlined"
-    sx={{
-      color: "#2d82ff",
-      borderColor: "#2d82ff",
-      fontSize: "12px",
-      fontWeight: 600,
-      padding: "8px 16px",
-    }}
-    {...p}
-  />
+  <Button variant="outlined" color={"primary"} {...p} />
 );
 
 const InnerTitle = (p: TypographyProps) => (
