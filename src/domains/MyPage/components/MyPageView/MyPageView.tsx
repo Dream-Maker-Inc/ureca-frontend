@@ -12,23 +12,27 @@ export const MyPageView = () => {
   return (
     <div css={styles.root}>
       <div css={styles.container}>
-        <div css={styles.rootTitle}>
+        <section css={styles.rootTitle}>
           <MyPageTitle>마이페이지</MyPageTitle>
-        </div>
-        <div css={styles.topContainer}>
+        </section>
+
+        <section css={styles.topContainer}>
           <div css={styles.topWrapper}>
             <TopTitle>프로필 관리</TopTitle>
             <InfoEditBtn>정보 수정하기</InfoEditBtn>
           </div>
+
           <MyPageIcon
             avatarImage="https://images.unsplash.com/photo-1601158935942-52255782d322?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=736&q=80/"
             brandNameText="드림메이커"
             brandInfoText="등록된 한 줄 소개가 없습니다."
           />
-        </div>
+        </section>
+
         <div css={styles.bottomContainer}>
-          <div css={styles.innerTopContainer}>
+          <section css={styles.innerTopContainer}>
             <InnerTitle>기본 정보</InnerTitle>
+
             <div css={styles.innerContainer}>
               <div css={styles.innerLeftWrapper}>
                 <MyPageInfo title="실명" desc="한*현" />
@@ -41,9 +45,11 @@ export const MyPageView = () => {
                 <MyPageInfo title="예금주" desc="주식회사 드림메이커" />
               </div>
             </div>
-          </div>
+          </section>
+
           <hr css={styles.hr} />
-          <div css={styles.innerTopContainer}>
+
+          <section css={styles.innerTopContainer}>
             <InnerTitle>상세 소개</InnerTitle>
             <ContentText>
               Lorem Ipsum is simply dummy text of the printing and typesetting
@@ -57,9 +63,11 @@ export const MyPageView = () => {
               publishing software like Aldus PageMaker including versions of
               Lorem Ipsum.
             </ContentText>
-          </div>
+          </section>
+
           <hr css={styles.hr} />
-          <div css={styles.innerTopContainer}>
+
+          <section css={styles.innerTopContainer}>
             <InnerTitle>알림 정보 (알림톡)</InnerTitle>
             <div css={styles.innerContainer}>
               <div css={styles.innerLeftWrapper}>
@@ -71,7 +79,7 @@ export const MyPageView = () => {
                 <MyPageInfo title="마케팅 및 홍보 메시지" desc="받지 않기" />
               </div>
             </div>
-          </div>
+          </section>
         </div>
       </div>
     </div>
@@ -141,31 +149,21 @@ const styles = {
 };
 
 const MyPageTitle = (p: TypographyProps) => (
-  <Typography fontSize={"30px"} fontWeight={800} {...p} />
+  <Typography variant="h4" fontWeight={700} {...p} />
 );
 
 const TopTitle = (p: TypographyProps) => (
-  <Typography fontSize={"26px"} fontWeight={700} {...p} />
+  <Typography variant="h5" fontWeight={600} {...p} />
 );
 
 const InfoEditBtn = (p: ButtonProps) => (
-  <Button variant="outlined" color={"primary"} {...p} />
+  <Button variant="outlined" color={"primary"} size={"small"} {...p} />
 );
 
 const InnerTitle = (p: TypographyProps) => (
-  <Typography
-    fontSize={"20px"}
-    fontWeight={700}
-    sx={{ marginBottom: "40px" }}
-    {...p}
-  />
+  <Typography variant="h6" sx={{ marginBottom: "40px" }} {...p} />
 );
 
 const ContentText = (p: TypographyProps) => (
-  <Typography
-    fontSize={"subtitle1"}
-    fontWeight={500}
-    sx={{ opacity: 0.8 }}
-    {...p}
-  />
+  <Typography fontSize={"subtitle1"} sx={{ opacity: 0.7 }} {...p} />
 );
