@@ -1,0 +1,1 @@
+export { BasicInfoView } from "./BasicInfoView";

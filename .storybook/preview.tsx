@@ -5,16 +5,21 @@ import * as NextImage from "next/image";
 import { RecoilRoot } from "recoil";
 import "../src/common/styles/globals.css";
 import { findTheme, ThemeTypes } from "../src/themes/CustomThemes";
+import { QueryClient, QueryClientProvider } from "react-query";
 
 const defaultTheme = findTheme(ThemeTypes.Light);
 
+const queryClient = new QueryClient();
+
 const withProviders = (Story, context) => (
   <RecoilRoot>
-    <EmotionThemeProvider theme={defaultTheme}>
-      <ThemeProvider theme={defaultTheme}>
-        <Story {...context} />
-      </ThemeProvider>
-    </EmotionThemeProvider>
+    <QueryClientProvider client={queryClient}>
+      <EmotionThemeProvider theme={defaultTheme}>
+        <ThemeProvider theme={defaultTheme}>
+          <Story {...context} />
+        </ThemeProvider>
+      </EmotionThemeProvider>
+    </QueryClientProvider>
   </RecoilRoot>
 );
 
