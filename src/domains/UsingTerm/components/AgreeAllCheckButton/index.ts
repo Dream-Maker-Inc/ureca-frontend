@@ -1,0 +1,1 @@
+export { AgreeAllCheckButton } from "./AgreeAllCheckButton";

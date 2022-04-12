@@ -1,0 +1,26 @@
+import { Meta, Canvas, Story, ArgsTable } from "@storybook/addon-docs";
+import { ProjectUsingTermCard } from ".";
+import { useArgs } from "@storybook/client-api";
+
+<Meta
+  title="Using-Term/프로젝트 약관 동의 카드"
+  component={ProjectUsingTermCard}
+/>
+
+# ProjectUsingTermCard
+
+프로젝트 약관 동의 카드
+
+export const Template = (args) => {
+  const [{ checked }, updateArgs] = useArgs();
+  const handleToggle = () => updateArgs({ checked: !checked });
+  return <ProjectUsingTermCard {...args} onToggle={handleToggle} />;
+};
+
+<Canvas>
+  <Story name="Default" args={{ checked: false }}>
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+<ArgsTable />
