@@ -8,39 +8,35 @@ import {
 } from "@mui/material";
 
 export type ProjectListItemProps = {
-  avatarImage: string;
-  brandNameText: string;
-  projectIndex: string;
-  projectTitle: string;
-  projectDate: string;
-  projectPrice: string;
-  prkjecctStatus: string;
+  avatar: {
+    imgUrl: string;
+    brandName: string;
+  };
+  project: {
+    id: string;
+    title: string;
+    transactionDate: string;
+    price: string;
+    state: string;
+  };
 };
 
-export const ProjectListItem = ({
-  avatarImage,
-  brandNameText,
-  projectIndex,
-  projectTitle,
-  projectDate,
-  projectPrice,
-  prkjecctStatus,
-}: ProjectListItemProps) => {
+export const ProjectListItem = ({ avatar, project }: ProjectListItemProps) => {
   return (
     <article css={styles.root}>
       <div css={styles.inner}>
-        <dl css={styles.avatarContainer}>
-          <BrandAvatar src={avatarImage} />
-          <BrandName>{brandNameText}</BrandName>
-        </dl>
+        <div css={styles.avatarContainer}>
+          <BrandAvatar src={avatar.imgUrl} />
+          <BrandName>{avatar.brandName}</BrandName>
+        </div>
         <dl css={styles.contentContainer}>
-          <ProjectIndex>#{projectIndex}</ProjectIndex>
-          <ProjectTitle>{projectTitle}</ProjectTitle>
-          <ProjectDate>거래일 : {projectDate}</ProjectDate>
+          <ProjectIndex>#{project.id}</ProjectIndex>
+          <ProjectTitle>{project.title}</ProjectTitle>
+          <ProjectDate>거래일 : {project.transactionDate}</ProjectDate>
         </dl>
         <div css={styles.priceContainer}>
-          <ProjectStatus>{prkjecctStatus}</ProjectStatus>
-          <ProjectPrice>{projectPrice}</ProjectPrice>
+          <ProjectStatus>{project.state}</ProjectStatus>
+          <ProjectPrice>{project.price}</ProjectPrice>
         </div>
       </div>
     </article>
@@ -49,10 +45,12 @@ export const ProjectListItem = ({
 
 const styles = {
   root: css`
-    max-width: 960px;
-    aspect-ratio: 8/1;
+    width: 100%;
+    min-height: 130px;
     padding: 22px 33px;
     border-bottom: 2px solid #eee;
+    display: flex;
+    align-items: center;
   `,
   inner: css`
     width: 100%;
@@ -78,6 +76,7 @@ const styles = {
     display: flex;
     flex-direction: column;
     align-items: end;
+    gap: 2px;
   `,
 };
 
@@ -97,9 +96,9 @@ const BrandName = (p: TypographyProps) => (
 
 const ProjectIndex = (p: TypographyProps) => (
   <Typography
-    variant={"subtitle2"}
-    fontWeight={500}
-    sx={{ opacity: 0.6, lineHeight: 1 }}
+    variant={"body2"}
+    component={"dd"}
+    sx={{ opacity: 0.8, lineHeight: 1 }}
     {...p}
   />
 );
@@ -107,8 +106,17 @@ const ProjectIndex = (p: TypographyProps) => (
 const ProjectTitle = (p: TypographyProps) => (
   <Typography
     variant={"body1"}
-    fontWeight={600}
-    sx={{ opacity: 0.7, lineHeight: 1 }}
+    component={"dd"}
+    fontWeight={500}
+    sx={{
+      opacity: 0.7,
+      lineHeight: 1,
+      overflow: "hidden",
+      textOverflow: "ellipsis",
+      display: "-webkit-box",
+      WebkitLineClamp: "2",
+      WebkitBoxOrient: "vertical",
+    }}
     {...p}
   />
 );
@@ -116,8 +124,8 @@ const ProjectTitle = (p: TypographyProps) => (
 const ProjectDate = (p: TypographyProps) => (
   <Typography
     variant={"body2"}
-    fontWeight={500}
-    sx={{ opacity: 0.6, lineHeight: 1 }}
+    component={"dd"}
+    sx={{ opacity: 0.8, lineHeight: 1 }}
     {...p}
   />
 );
