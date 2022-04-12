@@ -7,8 +7,11 @@ import {
 } from "@mui/material";
 import { MyPageIcon } from "../MyPageIcon";
 import { MyPageInfo } from "../MyPageInfo";
+import { useMyPageView } from "./useMyPageView";
 
 export const MyPageView = () => {
+  const { myPageInfos, events } = useMyPageView();
+
   const myPageIconData = {
     avatarImage:
       "https://images.unsplash.com/photo-1601158935942-52255782d322?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=736&q=80/",
@@ -43,10 +46,6 @@ export const MyPageView = () => {
     projectProgressInfo: "받기",
     noticeInfo: "받기",
     marketingInfo: "받기",
-  };
-
-  const handleEditInfo = () => {
-    alert("edit info");
   };
 
   return (
