@@ -26,6 +26,9 @@ const Debug: NextPage = () => {
             <Link href={RoutePath.Signup} passHref>
               <Button>회원가입 페이지</Button>
             </Link>
+            <Link href={RoutePath.SignupCompanyInfo} passHref>
+              <Button>회원가입 - 기업정보 페이지</Button>
+            </Link>
           </Stack>
 
           <Stack alignItems={"center"}>

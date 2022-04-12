@@ -1,0 +1,1 @@
+export { SmallCaption } from "./SmallCaption";
