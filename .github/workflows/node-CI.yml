@@ -27,4 +27,6 @@ jobs:
         working-directory: .
         run: |
           yarn install
+          yarn lint
+          yarn test-codecov
           yarn build
