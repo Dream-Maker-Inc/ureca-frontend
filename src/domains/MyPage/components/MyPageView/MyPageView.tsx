@@ -7,6 +7,7 @@ import {
 } from "@mui/material";
 import { MyPageIcon } from "../MyPageIcon";
 import { MyPageInfo } from "../MyPageInfo";
+<<<<<<< Updated upstream
 
 export const MyPageView = () => {
   const myPageIconData = {
@@ -44,6 +45,18 @@ export const MyPageView = () => {
     noticeInfo: "받기",
     marketingInfo: "받기",
   };
+=======
+import { useMyPageView } from "./useMyPageView";
+
+export const MyPageView = () => {
+  const {
+    myPageIconData,
+    basicInfoData,
+    introduceSelfData,
+    notificationData,
+    infoEditClick,
+  } = useMyPageView();
+>>>>>>> Stashed changes
 
   const handleEditInfo = () => {
     alert("edit info");
@@ -59,13 +72,17 @@ export const MyPageView = () => {
         <section css={styles.topContainer}>
           <div css={styles.topWrapper}>
             <TopTitle>프로필 관리</TopTitle>
+<<<<<<< Updated upstream
             <InfoEditBtn onClick={handleEditInfo}>정보 수정하기</InfoEditBtn>
+=======
+            <InfoEditBtn onClick={infoEditClick}>정보 수정하기</InfoEditBtn>
+>>>>>>> Stashed changes
           </div>
 
           <MyPageIcon
             avatarImage={myPageIconData.avatarImage}
-            brandNameText={myPageIconData.brandName}
-            brandInfoText={myPageIconData.brandInfo}
+            brandNameText={myPageIconData.brandNameText}
+            brandInfoText={myPageIconData.brandInfoText}
           />
         </section>
 
