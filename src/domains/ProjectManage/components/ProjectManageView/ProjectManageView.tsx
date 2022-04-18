@@ -85,11 +85,11 @@ const styles = {
     height: 100%;
     display: flex;
     flex-direction: column;
-    gap: 100px;
     padding: 100px 0;
   `,
   categorySection: css`
     width: 100%;
+    margin-bottom: 40px;
   `,
   subtitleWrapper: css`
     width: 100%;
