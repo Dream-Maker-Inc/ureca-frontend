@@ -1,5 +1,3 @@
-<<<<<<< Updated upstream
-=======
 import { MyPageIconProps } from "../MyPageIcon";
 
 export const useMyPageView = () => {
@@ -49,4 +47,3 @@ export const useMyPageView = () => {
     infoEditClick,
   };
 };
->>>>>>> Stashed changes
