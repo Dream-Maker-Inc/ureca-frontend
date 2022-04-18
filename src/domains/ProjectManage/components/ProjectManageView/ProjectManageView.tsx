@@ -65,8 +65,8 @@ export const ProjectManageView = () => {
           </div>
         </section>
         <section css={styles.projectSection}>
-          {projects.map((it) => (
-            <ProjectListItem key={it.project.id} {...it} />
+          {projects.map((it, index) => (
+            <ProjectListItem key={index} {...it} />
           ))}
         </section>
       </div>
