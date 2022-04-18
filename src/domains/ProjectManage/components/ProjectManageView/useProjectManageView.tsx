@@ -19,7 +19,7 @@ export const useProjectManageView = () => {
   };
 
   const handleKeywordChange = (value: string) => {
-    setFilter(value);
+    setKeyword(value);
   };
 
   const handleSubmit = () => alert("submit");
