@@ -107,6 +107,7 @@ const styles = {
   `,
   rootTitle: css`
     margin: 0 auto;
+    margin-bottom: 100px;
   `,
 };
 
