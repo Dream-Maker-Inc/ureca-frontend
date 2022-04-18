@@ -1,8 +1,8 @@
-import { ProjectManage } from "@/domains/ProjectManage";
+import { ProjectManageView } from "@/domains/ProjectManage";
 import { NextPage } from "next";
 
-const ProjectManage: NextPage = () => {
-  return <ProjectManage />;
+const ProjectManagePage: NextPage = () => {
+  return <ProjectManageView />;
 };
 
-export default ProjectManage;
+export default ProjectManagePage;
