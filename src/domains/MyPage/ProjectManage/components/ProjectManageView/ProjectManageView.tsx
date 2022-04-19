@@ -3,7 +3,6 @@ import { css } from "@emotion/react";
 import {
   MenuItem,
   Select,
-  Stack,
   Typography,
   TypographyProps,
   TextFieldProps,
@@ -77,7 +76,7 @@ export const ProjectManageView = () => {
 const styles = {
   root: css`
     width: 1024px;
-    min-height: 100%;
+    height: 100%;
     margin: 0 auto;
   `,
   container: css`
@@ -85,11 +84,11 @@ const styles = {
     height: 100%;
     display: flex;
     flex-direction: column;
-    padding: 100px 0;
+    padding: 100px 0 24px 0;
   `,
   categorySection: css`
     width: 100%;
-    margin-bottom: 40px;
+    margin-bottom: 24px;
   `,
   subtitleWrapper: css`
     width: 100%;
@@ -104,6 +103,7 @@ const styles = {
   projectSection: css`
     width: 100%;
     height: 100%;
+    overflow-y: scroll;
   `,
   rootTitle: css`
     margin: 0 auto;

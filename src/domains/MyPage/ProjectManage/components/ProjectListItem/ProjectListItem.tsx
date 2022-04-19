@@ -87,7 +87,7 @@ const BrandAvatar = (p: AvatarProps) => (
 const BrandName = (p: TypographyProps) => (
   <Typography
     variant={"subtitle2"}
-    fontWeight={700}
+    fontWeight={300}
     sx={{ opacity: 0.4, lineHeight: 1 }}
     noWrap
     {...p}
@@ -98,7 +98,7 @@ const ProjectIndex = (p: TypographyProps) => (
   <Typography
     variant={"body2"}
     component={"dd"}
-    sx={{ opacity: 0.8, lineHeight: 1 }}
+    sx={{ opacity: 0.5, lineHeight: 1 }}
     {...p}
   />
 );
@@ -106,11 +106,11 @@ const ProjectIndex = (p: TypographyProps) => (
 const ProjectTitle = (p: TypographyProps) => (
   <Typography
     variant={"body1"}
-    component={"dd"}
+    component={"dt"}
     fontWeight={500}
     sx={{
       opacity: 0.7,
-      lineHeight: 1,
+      lineHeight: 1.4,
       overflow: "hidden",
       textOverflow: "ellipsis",
       display: "-webkit-box",
@@ -125,7 +125,7 @@ const ProjectDate = (p: TypographyProps) => (
   <Typography
     variant={"body2"}
     component={"dd"}
-    sx={{ opacity: 0.8, lineHeight: 1 }}
+    sx={{ opacity: 0.5, lineHeight: 1 }}
     {...p}
   />
 );
