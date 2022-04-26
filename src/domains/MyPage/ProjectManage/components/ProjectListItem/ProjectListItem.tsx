@@ -107,7 +107,7 @@ const ProjectTitle = (p: TypographyProps) => (
   <Typography
     variant={"body1"}
     component={"dt"}
-    fontWeight={500}
+    fontWeight={300}
     sx={{
       opacity: 0.7,
       lineHeight: 1.4,
