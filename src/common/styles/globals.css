@@ -24,3 +24,7 @@ a {
   width: 100%;
   height: 100%;
 }
+
+.MuiOutlinedInput-root fieldset.MuiOutlinedInput-notchedOutline {
+  border-color: #e9e9e9;
+}
