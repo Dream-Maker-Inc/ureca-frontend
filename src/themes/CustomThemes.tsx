@@ -48,9 +48,13 @@ export const lightTheme = createTheme({
       },
     },
     MuiCard: {
+      defaultProps: {
+        elevation: 0,
+      },
       styleOverrides: {
         root: {
           borderRadius: Shape.Large,
+          border: "1px solid #eee",
         },
       },
     },

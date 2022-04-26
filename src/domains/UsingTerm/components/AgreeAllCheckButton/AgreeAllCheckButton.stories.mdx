@@ -1,0 +1,23 @@
+import { Meta, Canvas, Story, ArgsTable } from "@storybook/addon-docs";
+import { AgreeAllCheckButton } from ".";
+import { useArgs } from "@storybook/client-api";
+
+<Meta title="Using-Term/모두 동의 버튼" component={AgreeAllCheckButton} />
+
+# AgreeAllCheckButton
+
+모두 동의 버튼
+
+export const Template = (args) => {
+  const [{ checked }, updateArgs] = useArgs();
+  const handleToggle = () => updateArgs({ checked: !checked });
+  return <AgreeAllCheckButton {...args} onToggle={handleToggle} />;
+};
+
+<Canvas>
+  <Story name="Default" args={{ checked: false }}>
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+<ArgsTable />
