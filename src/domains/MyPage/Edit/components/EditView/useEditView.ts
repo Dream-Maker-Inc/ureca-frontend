@@ -1,10 +1,10 @@
 import { SignupPolicy } from "@/common/policies";
 import { MyPageIconProps } from "@/domains/MyPage/components/MyPageIcon";
 import { useState } from "react";
-import { FormModel } from "./model/EditViewModel.model";
+import { EditFormModel } from "./model/EditViewModel.model";
 
 export const useEditView = () => {
-  const [formModel, setFormModel] = useState<FormModel>({
+  const [formModel, setFormModel] = useState<EditFormModel>({
     nickname: "",
     selfDesc: "",
     email: "",
