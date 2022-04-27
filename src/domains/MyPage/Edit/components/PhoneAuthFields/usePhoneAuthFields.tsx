@@ -1,74 +1,80 @@
-import {ChangeEvent, useMemo, useState} from "react";
-import {AuthPhonePolicy, SignupPolicy} from "@/common/policies";
+import { SignupPolicy } from "@/common/policies";
+import { ChangeEvent, useEffect } from "react";
+import { PhoneAuthFieldsProps } from "./PhoneAuthFields";
+import { useVerifyCode } from "./useVerifyCode";
 
-export const usePhoneAuthFields = () => {
-    const [phoneValue, setPhoneValue] = useState("");
-    const [verifiedValue, setVerifiedValue] = useState("");
-    const verifidedCode = "1234";
+export const usePhoneAuthFields = ({
+  phoneState,
+  verifiedPhoneState,
+}: PhoneAuthFieldsProps) => {
+  const { value: phone, onChange: onPhoneChange } = phoneState;
 
-    const handlePhoneChange = (e: ChangeEvent<HTMLInputElement>) => {
-        setPhoneValue(e.target.value);
-    }
-    const handleVerifiedChange = (e: ChangeEvent<HTMLInputElement>) => {
-        setVerifiedValue(e.target.value);
-    }
+  // 휴대폰 번호 검증 영역
+  const {
+    verifyCode,
+    handleVerifyCodeChange,
+    isSendedVerifyCode,
+    invalideSendedVerifyState,
+    sendVerifyCode,
+    isVerifiedCode,
+    confirmVerifyCode,
+    verifyTime,
+    handleVerifyTimeChange,
+    verifyTimeOver,
+    verifyHelperText,
+  } = useVerifyCode();
 
-    // Validate phone number
-    const [isVisibleVerifiedField, setVisibleVerifiedField] = useState(false);
-    const isValidPhone = SignupPolicy.validatePhoneNumber(phoneValue);
-    const handlePhoneAuthClick = () => {
-        setVisibleVerifiedField(true);
-    };
+  const handlePhoneChange = (e: ChangeEvent<HTMLInputElement>) => {
+    onPhoneChange(e.target.value);
+    invalideSendedVerifyState();
+  };
+  const isValidPhone = SignupPolicy.validatePhoneNumber(phone);
 
-    // Setting timeer
-    const [timer, setTimer] = useState(0);
-    const handleTimeChange = useMemo(
-        () => (time: number) => setTimer(time),
-        [setTimer]
-    );
-    const timerOver = timer < 0;
+  const visiblePhoneHelperText =
+    !!phone && (!isValidPhone || isSendedVerifyCode);
 
-    // Verify code
-    const [isSendedCode, setSendedCode] = useState(false);
-    const handleVerifyCodeClick = () => {
-        setSendedCode(verifiedValue == verifidedCode);
-        setTimer(AuthPhonePolicy.maxTime);
-    };
+  useEffect(() => {
+    verifiedPhoneState.onChange(isVerifiedCode);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isVerifiedCode]);
 
-    return {
-        phoneState: {
-            value: phoneValue,
-            onChange: handlePhoneChange,
-            helper: {
-                visible: !!phoneValue && (isVisibleVerifiedField || !isValidPhone),
-                error: isValidPhone || isVisibleVerifiedField,
-                text: isVisibleVerifiedField ? "인증이 완료되었습니다." : "전화번호 형식이 틀렸습니다.",
-            },
-            button: {
-                disabled: !phoneValue || !isValidPhone || isVisibleVerifiedField,
-                onClick: handlePhoneAuthClick,
-            },
-            disabled: isVisibleVerifiedField
-        },
-        verifiedState: {
-            value: verifiedValue,
-            onChange: handleVerifiedChange,
-            helper: {
-                error: isSendedCode,
-                text: isSendedCode ? "인증이 완료되었습니다." : "인증번호를 확인해주세요.",
-            },
-            timer: {
-                value: timer,
-                onChange: handleTimeChange,
-                timeOver: timerOver,
-                disabled: !isSendedCode
-            },
-            button: {
-                onClick: handleVerifyCodeClick,
-                text: timerOver ? "다시받기" : "확인"
-            },
-            visible: isVisibleVerifiedField,
-            disabled: isSendedCode
-        }
-    }
-}
+  return {
+    phoneState: {
+      value: phoneState.value,
+      onChange: handlePhoneChange,
+      helper: {
+        visible: visiblePhoneHelperText,
+        error: !!phone && !isValidPhone,
+        text: !isValidPhone
+          ? "휴대폰 번호 형식에 맞지 않아요."
+          : isSendedVerifyCode && "인증 번호가 발송되었어요.",
+      },
+      disabled: isVerifiedCode,
+      verify: {
+        disabled: !isValidPhone || isVerifiedCode,
+        sendVerifyCode,
+      },
+    },
+    verifyCodeState: {
+      value: verifyCode,
+      onChange: handleVerifyCodeChange,
+      helper: {
+        error: !isVerifiedCode || verifyTimeOver,
+        text: verifyHelperText,
+      },
+      timer: {
+        value: verifyTime,
+        onChange: handleVerifyTimeChange,
+        timeOver: verifyTimeOver,
+      },
+      confirm: {
+        disabled: isVerifiedCode,
+        confirmVerifyCode,
+      },
+      visible: isSendedVerifyCode,
+      disabled: isVerifiedCode,
+      label: verifyTimeOver ? "다시받기" : "확인",
+      send: sendVerifyCode,
+    },
+  };
+};
