@@ -12,11 +12,6 @@ import { TextFieldWithTitle } from "@/domains/MyPage/Edit/components/TextFieldWi
 import { FieldHeader } from "../FieldHeader";
 import { PhoneAuthFields } from "@/domains/Signup/BasicInfo/components/PhoneAuthFields";
 
-export type NameAlertProps = {
-  title: string;
-  desc: string;
-};
-
 export const EditView = () => {
   const {
     myPageIconData,
