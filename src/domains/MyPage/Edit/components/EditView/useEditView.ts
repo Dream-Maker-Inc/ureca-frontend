@@ -1,16 +1,9 @@
 import { SignupPolicy } from "@/common/policies";
 import { MyPageIconProps } from "@/domains/MyPage/components/MyPageIcon";
 import { useState } from "react";
+import { FormModel } from "./model/EditViewModel.model";
 
 export const useEditView = () => {
-  type FormModel = {
-    nickname: string;
-    selfDesc: string;
-    email: string;
-    phone: string;
-    verifiedPhone: boolean;
-  };
-
   const [formModel, setFormModel] = useState<FormModel>({
     nickname: "",
     selfDesc: "",
@@ -90,7 +83,7 @@ export const useEditView = () => {
     },
 
     validationState: {
-      disabled: verifiedPhone && isValidEmail ? false : true,
+      disabled: !verifiedPhone,
     },
   };
 };
