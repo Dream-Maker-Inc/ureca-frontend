@@ -9,8 +9,8 @@ import {
 } from "@mui/material";
 import { useEditView } from "./useEditView";
 import { TextFieldWithTitle } from "@/domains/MyPage/Edit/components/TextFieldWithTitle";
-import { PhoneAuthFields } from "../PhoneAuthFields";
 import { FieldHeader } from "../FieldHeader";
+import { PhoneAuthFields } from "@/domains/Signup/BasicInfo/components/PhoneAuthFields";
 
 export type NameAlertProps = {
   title: string;
@@ -84,6 +84,7 @@ export const EditView = () => {
             <PhoneAuthFields
               phoneState={phoneState}
               verifiedPhoneState={verifiedPhoneState}
+              header={{ disabled: true }}
             />
           </Stack>
           <TextFieldWithTitle

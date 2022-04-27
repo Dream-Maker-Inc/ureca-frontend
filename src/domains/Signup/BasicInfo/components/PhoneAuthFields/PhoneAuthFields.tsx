@@ -19,19 +19,25 @@ export type PhoneAuthFieldsProps = {
     value: boolean;
     onChange: (isVerified: boolean) => void;
   };
+  header?: {
+    disabled: boolean;
+  };
 };
 
 export const PhoneAuthFields = (p: PhoneAuthFieldsProps) => {
   const { phoneState, verifyCodeState } = usePhoneAuthFields(p);
+  const { header } = p;
 
   return (
     <section css={styles.formFieldContainer}>
       <div css={styles.formFieldWrapper}>
-        <FieldHeader
-          title={"휴대폰 본인 인증"}
-          description={"휴대폰 번호를 입력하신 후 인증 번호로 인증해 주세요."}
-          requirement
-        />
+        {!header?.disabled && (
+          <FieldHeader
+            title={"휴대폰 본인 인증"}
+            description={"휴대폰 번호를 입력하신 후 인증 번호로 인증해 주세요."}
+            requirement
+          />
+        )}
 
         <div css={styles.phoneAuthContainer}>
           <TextField
