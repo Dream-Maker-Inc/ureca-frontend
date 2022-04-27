@@ -31,7 +31,7 @@ const Title = (p: TypographyProps) => (
 );
 
 const Desc = (p: TypographyProps) => (
-  <Typography variant={"body2"} sx={{ opacity: 0.9 }} {...p} />
+  <Typography variant={"body2"} sx={{ opacity: 0.7 }} {...p} />
 );
 
 const CustomTextField = (p: TextFieldProps) => (
