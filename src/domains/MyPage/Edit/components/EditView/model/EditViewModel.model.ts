@@ -4,4 +4,5 @@ export type EditFormModel = {
   email: string;
   phone: string;
   verifiedPhone: boolean;
+  verifiedEmail: boolean;
 };

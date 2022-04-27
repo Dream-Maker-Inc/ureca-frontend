@@ -10,6 +10,7 @@ export const useEditView = () => {
     email: "",
     phone: "",
     verifiedPhone: false,
+    verifiedEmail: true,
   });
 
   const { nickname, selfDesc, email, phone, verifiedPhone } = formModel;
@@ -27,6 +28,7 @@ export const useEditView = () => {
     setFormModel((old) => ({ ...old, email: value }));
 
   const isValidEmail = SignupPolicy.validateEmail(email);
+  const isPassedEmail = email === "" || isValidEmail;
 
   // 핸드폰 인증 영역
   const handlePhoneChange = (value: string) =>
@@ -83,7 +85,7 @@ export const useEditView = () => {
     },
 
     validationState: {
-      disabled: !verifiedPhone,
+      disabled: !(verifiedPhone && isPassedEmail),
     },
   };
 };
