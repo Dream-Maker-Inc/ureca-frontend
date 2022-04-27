@@ -24,6 +24,9 @@ export const EditView = () => {
     nicknameState,
     selfDescState,
     emailState,
+    phoneState,
+    verifiedPhoneState,
+    validationState,
   } = useEditView();
 
   return (
@@ -64,30 +67,46 @@ export const EditView = () => {
               onChange: (e) => selfDescState.onChange(e.target.value),
             }}
           />
-          <NameAlert
+
+          <FieldHeader
             title={"실명"}
             desc={
               "실명은 최초 등록 이후 변경이 불가합니다. 개명, 명의 변경 등이 필요하실 경우 고객센터로 문의주세요."
             }
           />
+
           <Stack gap={"6px"}>
             <FieldHeader
               title={"휴대폰 본인 인증"}
               desc={"휴대폰 번호를 입력하신 후 인증 번호로 인증해 주세요."}
               necessary={true}
             />
-            <PhoneAuthFields />
+            <PhoneAuthFields
+              phoneState={phoneState}
+              verifiedPhoneState={verifiedPhoneState}
+            />
           </Stack>
           <TextFieldWithTitle
             title={"이메일"}
             desc={"각종 정보가 이메일로 발송됩니다."}
             textfieldProps={{
               placeholder: "이메일을 입력하세요.",
+              helperText: emailState.helper.visible && (
+                <SmallCaption color={emailState.helper.error}>
+                  {emailState.helper.text}
+                </SmallCaption>
+              ),
+
               value: emailState.value,
               onChange: (e) => emailState.onChange(e.target.value),
             }}
           />
-          <EditButton onClick={handleEditClick}>수정하기</EditButton>
+          <EditButton
+            disabled={validationState.disabled}
+            onClick={handleEditClick}
+          >
+            수정하기
+          </EditButton>
         </Stack>
       </section>
     </div>
@@ -124,29 +143,8 @@ const TopTitle = (p: TypographyProps) => (
   <Typography variant="h5" fontWeight={600} {...p} />
 );
 
-const NameAlert = ({ title, desc }: NameAlertProps) => (
-  <Stack gap={"6px"}>
-    <Title variant={"subtitle1"} lineHeight={1} fontWeight={600}>
-      {title}
-    </Title>
-    <Desc variant={"body2"} sx={{ opacity: 0.9 }}>
-      {desc}
-    </Desc>
-  </Stack>
-);
-
-const Title = (p: TypographyProps) => (
-  <Typography
-    component={"dt"}
-    variant={"subtitle1"}
-    lineHeight={1}
-    fontWeight={600}
-    {...p}
-  />
-);
-
-const Desc = (p: TypographyProps) => (
-  <Typography component={"dd"} variant={"body2"} sx={{ opacity: 0.9 }} {...p} />
+const SmallCaption = (p: TypographyProps) => (
+  <Typography variant="caption" fontSize={"10px"} fontWeight={100} {...p} />
 );
 
 const EditButton = (p: ButtonProps) => (
