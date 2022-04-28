@@ -18,18 +18,14 @@ export const MyPageView = () => {
     infoEditClick,
   } = useMyPageView();
 
-  const handleEditInfo = () => {
-    alert("edit info");
-  };
-
   return (
-    <div css={styles.root}>
+    <main css={styles.root}>
       <div css={styles.container}>
         <section css={styles.rootTitle}>
           <MyPageTitle>마이페이지</MyPageTitle>
         </section>
 
-        <section css={styles.topContainer}>
+        <section css={styles.categorySection}>
           <div css={styles.topWrapper}>
             <TopTitle>프로필 관리</TopTitle>
             <InfoEditBtn onClick={infoEditClick}>정보 수정하기</InfoEditBtn>
@@ -43,7 +39,7 @@ export const MyPageView = () => {
         </section>
 
         <div css={styles.bottomContainer}>
-          <section css={styles.innerTopContainer}>
+          <section css={styles.contentSection}>
             <InnerTitle>기본 정보</InnerTitle>
 
             <div css={styles.innerContainer}>
@@ -62,14 +58,14 @@ export const MyPageView = () => {
 
           <hr css={styles.hr} />
 
-          <section css={styles.innerTopContainer}>
+          <section css={styles.contentSection}>
             <InnerTitle>상세 소개</InnerTitle>
             <ContentText>{introduceSelfData}</ContentText>
           </section>
 
           <hr css={styles.hr} />
 
-          <section css={styles.innerTopContainer}>
+          <section css={styles.contentSection}>
             <InnerTitle>알림 정보 (알림톡)</InnerTitle>
             <div css={styles.innerContainer}>
               <div css={styles.innerLeftWrapper}>
@@ -96,7 +92,7 @@ export const MyPageView = () => {
           </section>
         </div>
       </div>
-    </div>
+    </main>
   );
 };
 
@@ -117,8 +113,14 @@ const styles = {
   rootTitle: css`
     margin: 0 auto;
   `,
-  topContainer: css`
+  categorySection: css`
     width: 100%;
+  `,
+  topWrapper: css`
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 40px;
   `,
   bottomContainer: css`
     width: 100%;
@@ -127,13 +129,8 @@ const styles = {
     gap: 100px;
     padding: 0 40px;
   `,
-  topWrapper: css`
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 40px;
-  `,
-  innerTopContainer: css`
+
+  contentSection: css`
     width: 100%;
   `,
   innerLeftWrapper: css`
